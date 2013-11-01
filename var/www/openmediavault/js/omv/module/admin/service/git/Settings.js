@@ -167,13 +167,13 @@ Ext.define("OMV.module.admin.service.git.Settings", {
                 name: "gitweb-enable",
                 fieldLabel: _("Enable"),
                 boxLabel: _("Enable read-only repository content and history browsing through GitWeb"),
-                checked: true
+                checked: false
             },{
                 xtype: "checkbox",
                 name: "gitweb-anon",
                 fieldLabel: _("Allow anonymous access"),
                 boxLabel: _("Users do not have to log in to view GitWeb"),
-                checked: true
+                checked: false
             },{
                 xtype: "checkbox",
                 name: "showtab",

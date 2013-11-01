@@ -95,7 +95,7 @@ class OMVRpcServiceGit extends OMVRpcServiceAbstract {
         $repoFolder = "{$deviceDir}/git-repos";
         $params['repository-root'] = $repoFolder;
 
-        $econf = $this->get();
+        $econf = $this->getSettings($params, $context);
         
 		// Don't change repo root if we have existing repos
 		if (is_array($econf['repos']) && count($econf['repos']) && $econf['repository-root'] != $params['repository-root']) {
@@ -154,7 +154,7 @@ class OMVRpcServiceGit extends OMVRpcServiceAbstract {
 		$object = $xmlConfig->get($xpath);
         
 		// Remove the folder
-		$repoFolder = $this->configGet("//services/git/repository-root") . "/" . $object['name'];
+		$repoFolder = $xmlConfig->get("//services/git/repository-root") . "/" . $object['name'];
 		// These must match!!!
 		if (realpath($repoFolder) == $repoFolder)
 		{
@@ -188,7 +188,7 @@ class OMVRpcServiceGit extends OMVRpcServiceAbstract {
 		// Get configuration data.
 		$xpath = "//services/git/repos/repo";
 		$objects = $xmlConfig->getList($xpath);
-        $gitroot = $this->configGet("//services/git/repository-root") . "/";
+        $gitroot = $xmlConfig->get("//services/git/repository-root") . "/";
 		if(is_null($objects)) {
 			throw new OMVException(OMVErrorMsg::E_CONFIG_GET_OBJECT_FAILED, $xpath);
 		}
@@ -232,17 +232,20 @@ class OMVRpcServiceGit extends OMVRpcServiceAbstract {
 			"comment" => $params['comment']
 		);
 
+		$xpath = "//services/git/repos/repo";
+		$objects = $xmlConfig->getList($xpath);
+        
 		// Set configuration data
         $success = FALSE;
 		if ($params['uuid'] == $GLOBALS['OMV_UUID_UNDEFINED']) {
 
 			// Check uniqueness
-			if (TRUE === $this->configExists("//services/git/repos/repo[name='{$object['name']}']")) {
+			if (TRUE ===  $xmlConfig->exists("//services/git/repos/repo[name='{$object['name']}']")) {
 				throw new OMVException(OMVErrorMsg::E_CONFIG_OBJECT_UNIQUENESS);
 			}
 
 			// Initialize repo
-			$path = $this->configGet("//services/git/repository-root") . "/{$object['name']}";
+			$path = $xmlConfig->get("//services/git/repository-root") . "/{$object['name']}";
 
 			// If this isn't an existing repository, create it
 			if (! file_exists($path)) {
@@ -263,13 +266,13 @@ class OMVRpcServiceGit extends OMVRpcServiceAbstract {
 			$object['privileges'] = array();
 
 			// Append object to configuration
-			$this->configSet("//services/git/repos", array("repo" => $object));
+			$success = $xmlConfig->set("//services/git/repos", array("repo" => $object));
 		} else {
 			// Update existing configuration object
 			$success = $xmlConfig->replace("//services/git/repos/repo[uuid='{$params['uuid']}']", $object);
 
 			// Need path to repo
-			$path = $this->configGet("//services/git/repository-root") . "/" . $object['name'];
+			$path = $xmlConfig->get("//services/git/repository-root") . "/" . $object['name'];
 		}
         
 		if(FALSE === $success) {
@@ -474,5 +477,9 @@ class OMVRpcServiceGit extends OMVRpcServiceAbstract {
 		return $object;
 	}
 }
+
+// Register the RPC service.
+$rpcServiceMgr = &OMVRpcServiceMgr::getInstance();
+$rpcServiceMgr->registerService(new OMVRpcServiceGit());
 
 ?>
