@@ -1,0 +1,112 @@
+#!/bin/sh
+#
+# @license		http://www.gnu.org/licenses/gpl.html GPL Version 3
+# @author		Ian Moore <imooreyahoo@gmail.com>
+# @author       Marcel Beck <marcel.beck@mbeck.org>
+# @author       OpenMediaVault Plugin Developers <plugins@omv-extras.org>
+# @copyright	Copyright (c) 2011-2012 Ian Moore
+# @copyright	Copyright (c) 2012 Marcel Beck
+# @copyright    Copyright (c) 2013 OpenMediaVault Plugin Developers
+#
+# This file is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# any later version.
+#
+# This file is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this file. If not, see <http://www.gnu.org/licenses/>.
+
+set -e
+
+. /etc/default/openmediavault
+. /usr/share/openmediavault/scripts/helper-functions
+
+
+OMV_GIT_CONFIG=${OMV_GIT_CONFIG:-"/etc/apache2/openmediavault-webgui.d/git.conf"}
+
+# Enable/disable service
+if [ "$(omv_config_get "//services/git/enable")" = "0" ]; then
+    if [ -f ${OMV_GIT_CONFIG} ]; then
+		/bin/rm -f ${OMV_GIT_CONFIG}
+		exit $?
+	fi
+	exit 0
+fi
+
+OMV_GIT_REPO_ROOT="$(omv_config_get "//services/git/repository-root")"
+
+# Create apache config file
+cat <<EOF > ${OMV_GIT_CONFIG}
+AddExternalAuth pwauth /usr/sbin/pwauth
+SetExternalAuthMethod pwauth pipe
+
+EOF
+
+# GitWeb config
+if [ "$(omv_config_get "//services/git/gitweb-enable")" = "1" ]; then
+
+	echo "\$projectroot = '${OMV_GIT_REPO_ROOT}/';" >/etc/git/web.conf
+
+	cat <<EOF >> ${OMV_GIT_CONFIG}
+
+AliasMatch ^/git/(git\-favicon\.png|git\-logo\.png|gitweb\.css|gitweb\.js|index\.cgi)$ "/var/www/gitweb/\$1"
+AliasMatch ^/git/(.+)$ "${OMV_GIT_REPO_ROOT}/\$1"
+RedirectMatch ^/git/*$ "/git/index.cgi"
+
+<Directory /var/www/gitweb>
+    DirectoryIndex index.cgi
+    Options FollowSymLinks +ExecCGI
+    AddHandler cgi-script .cgi
+EOF
+
+	if [ "$(omv_config_get "//services/git/gitweb-anon")" = "0" ]; then
+	    echo "  <limit GET PUT POST DELETE PROPPATCH MKCOL COPY MOVE LOCK UNLOCK PROPFIND OPTIONS REPORT>" >>${OMV_GIT_CONFIG}
+		echo "	  Require valid-user" >>${OMV_GIT_CONFIG}
+		echo "  </limit>" >>${OMV_GIT_CONFIG}
+    fi
+	
+	echo "</Directory>" >> ${OMV_GIT_CONFIG}
+
+else
+	echo "AliasMatch ^/git/(.+)$ \"${OMV_GIT_REPO_ROOT}/\$1\"" >> ${OMV_GIT_CONFIG}
+fi
+	
+
+# auth requirement
+cat <<EOF >>${OMV_GIT_CONFIG}
+<Directory ${OMV_GIT_REPO_ROOT}>
+   <limit GET PUT POST DELETE PROPPATCH MKCOL COPY MOVE LOCK UNLOCK PROPFIND OPTIONS REPORT>
+      Require valid-user
+   </limit>
+</Directory>
+
+<Location /git>
+   DAV on
+   AuthType Basic
+   AuthBasicProvider external
+   AuthExternal pwauth
+   AuthzSVNAccessFile /etc/git/authz
+   SVNParentPath ${OMV_GIT_REPO_ROOT}
+   SVNListParentPath on
+   AuthName "$(omv_config_get "//services/git/realm")"
+</Location>
+
+EOF
+
+# Check that configtest passed. We don't want
+# apache to fail to start
+CTEST=`/usr/sbin/apache2ctl configtest 2>&1 || echo ___FAILED___`
+
+if [ `echo $CTEST | grep -c ___FAILED___` -gt 0 ]; then
+    echo "Config test failed. Removing ${OMV_GIT_CONFIG}..."
+	# Pass error to web page
+    echo `/usr/sbin/apache2ctl configtest 2>&1 || echo `
+    /bin/rm -f ${OMV_GIT_CONFIG}
+    exit 1
+fi
+
