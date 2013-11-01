@@ -1,0 +1,112 @@
+# openmediavault-git
+# Copyright (C) 2013
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: openmediavault-git\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-01 09:49-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Add repository"
+msgstr "Add repository"
+
+msgid "Allow anonymous access"
+msgstr "Allow anonymous access"
+
+msgid "Authentication realm."
+msgstr "Authentication realm."
+
+msgid "Database files will move to new location if database volume is changed."
+msgstr "Database files will move to new location if database volume is changed."
+
+msgid "Database Volume"
+msgstr "Database Volume"
+
+msgid "Default privilege level"
+msgstr "Default privilege level"
+
+msgid "Default privileges"
+msgstr "Default privileges"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Edit privileges"
+msgstr "Edit privileges"
+
+msgid "Edit repository"
+msgstr "Edit repository"
+
+msgid "Enable"
+msgstr "Enable"
+
+msgid "Enable read-only repository content and history browsing through GitWeb"
+msgstr "Enable read-only repository content and history browsing through GitWeb"
+
+msgid "General settings"
+msgstr "General settings"
+
+msgid "Git"
+msgstr "Git"
+
+msgid "GitWeb"
+msgstr "GitWeb"
+
+msgid "Launch GitWeb"
+msgstr "Launch GitWeb"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "No access"
+msgstr "No access"
+
+msgid "Privileges"
+msgstr "Privileges"
+
+msgid "Read-only"
+msgstr "Read-only"
+
+msgid "Read / Write"
+msgstr "Read / Write"
+
+msgid "Realm Name"
+msgstr "Realm Name"
+
+msgid "Repositories"
+msgstr "Repositories"
+
+msgid "Repository name."
+msgstr "Repository name."
+
+msgid "Repository root"
+msgstr "Repository root"
+
+msgid "Select a volume ..."
+msgstr "Select a volume ..."
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Show Tab"
+msgstr "Show Tab"
+
+msgid "Show tab containing GitWeb frame"
+msgstr "Show tab containing GitWeb frame"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Users do not have to log in to view GitWeb"
+msgstr "Users do not have to log in to view GitWeb"
+
