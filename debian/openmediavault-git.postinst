@@ -24,83 +24,88 @@ set -e
 . /etc/default/openmediavault
 . /usr/share/openmediavault/scripts/helper-functions
 
-
 case "$1" in
-	configure)
-		# Enable required apache modules
-		a2enmod authnz_external dav_svn dav_fs
+    configure)
+        echo "Initialize configuration"
+        
+        # Check for XML config
+        if ! omv_config_exists "/config/services/git"; then
+            object="<enable>0</enable>"
+            object="${object}<mntentref></mntentref>"
+            object="${object}<realm>Git Repositories on OMV</realm>"
+            object="${object}<repository-root></repository-root>"
+            object="${object}<repos></repos>"
+            object="${object}<gitweb-enable>0</gitweb-enable>"
+            object="${object}<gitweb-anon>0</gitweb-anon>"
+            object="${object}<showtab>0</showtab>"
+            omv_config_add_element "/config/services" "git" "${object}" true        
+        fi
 
-		# Check for XML config
-		if ! omv_config_exists "//services/git"; then
-			omv_config_add_element "//services" "git" ""
-			omv_config_add_element "//services/git" "enable" "0"
-			omv_config_add_element "//services/git" "mntentref" ""
-			omv_config_add_element "//services/git" "realm" "Git Repositories on OMV"
-			omv_config_add_element "//services/git" "repository-root" ""
-			omv_config_add_element "//services/git" "repos" ""
-			omv_config_add_element "//services/git" "gitweb-enable" "0"
-			omv_config_add_element "//services/git" "gitweb-anon" "0"
-            omv_config_add_element "//services/git" "showtab" "0"
-		fi
+        chown -R openmediavault:openmediavault /var/www/gitweb
 
-		chown -R openmediavault:openmediavault /var/www/gitweb
+        index=$(omv_config_get_count "//services/git/repos/repo")
+        while [ ${index} -gt 0 ]
+        do
+            reporef=$(omv_config_get "//services/git/repos/repo[position()=${index}]/uuid")
 
-		index=$(omv_config_get_count "//services/git/repos/repo")
-		while [ ${index} -gt 0 ]
-		do
-			reporef=$(omv_config_get "//services/git/repos/repo[position()=${index}]/uuid")
+            privileges_index=$(omv_config_get_count "//services/git/repos/repo[uuid='${reporef}']/privileges/privilege")
+            while [ ${privileges_index} -gt 0 ]
+            do
+                USERUUID="$(omv_config_get "//services/git/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/userref")"
+                if [ "${USERUUID}" != "" ]; then
+                    if omv_isuuid "${USERUUID}"; then
+                        USERNAME=$(omv_config_get "//system/usermanagement/users/user[uuid='${USERUUID}']/name")
+                        if ! omv_config_exists "//services/git/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/username"; then
+                            echo "Transform User UUID: ${USERUUID} to Username: ${USERNAME}"
+                            omv_config_add_element "//services/git/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]" "username" "${USERNAME}"
+                            omv_config_delete "//services/git/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/userref"
+                        fi
+                    fi
+                fi
 
-			privileges_index=$(omv_config_get_count "//services/git/repos/repo[uuid='${reporef}']/privileges/privilege")
-			while [ ${privileges_index} -gt 0 ]
-			do
-				USERUUID="$(omv_config_get "//services/git/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/userref")"
-				if [ "${USERUUID}" != "" ]; then
-					if omv_isuuid "${USERUUID}"; then
-						USERNAME=$(omv_config_get "//system/usermanagement/users/user[uuid='${USERUUID}']/name")
-						if ! omv_config_exists "//services/git/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/username"; then
-							echo "Transform User UUID: ${USERUUID} to Username: ${USERNAME}"
-							omv_config_add_element "//services/git/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]" "username" "${USERNAME}"
-							omv_config_delete "//services/git/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/userref"
-						fi
-					fi
-				fi
+                GROUPUUID="$(omv_config_get "//services/git/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/groupref")"
+                if [ "${GROUPUUID}" != "" ]; then
+                    if omv_isuuid "${GROUPUUID}"; then
+                        GROUPNAME=$(omv_config_get "//system/usermanagement/groups/group[uuid='${GROUPUUID}']/name")
+                        if ! omv_config_exists "//services/git/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/groupname"; then
+                            echo "Transform Group UUID: ${GROUPUUID} to Groupname: ${GROUPNAME}"
+                            omv_config_add_element "//services/git/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]" "groupname" "${GROUPNAME}"
+                            omv_config_delete "//services/git/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/groupref"
+                        fi
+                    fi
+                fi
 
-				GROUPUUID="$(omv_config_get "//services/git/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/groupref")"
-				if [ "${GROUPUUID}" != "" ]; then
-					if omv_isuuid "${GROUPUUID}"; then
-						GROUPNAME=$(omv_config_get "//system/usermanagement/groups/group[uuid='${GROUPUUID}']/name")
-						if ! omv_config_exists "//services/git/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/groupname"; then
-							echo "Transform Group UUID: ${GROUPUUID} to Groupname: ${GROUPNAME}"
-							omv_config_add_element "//services/git/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]" "groupname" "${GROUPNAME}"
-							omv_config_delete "//services/git/repos/repo[position()=${index}]/privileges/privilege[position()=${privileges_index}]/groupref"
-						fi
-					fi
-				fi
+                privileges_index=$(( ${privileges_index} - 1 ))
+            done
 
-				privileges_index=$(( ${privileges_index} - 1 ))
-			done
+            index=$(( ${index} - 1 ))
+        done
 
-			index=$(( ${index} - 1 ))
-		done
+        # Enable required apache modules
+        echo "Enable apache modules"
+        a2enmod authnz_external dav_svn dav_fs
+        
+        echo "Clean up old installation"
+        # Clean up old installation?
+        if [ -f /etc/apache2/conf.d/omv-git ]; then
+            /bin/rm -f /etc/apache2/conf.d/omv-git
+        fi
 
-		# Clean up old installation?
-		if [ -f /etc/apache2/conf.d/omv-git ]; then
-			/bin/rm -f /etc/apache2/conf.d/omv-git
-		fi
+        echo "Make configuration"
+        omv-mkconf git
 
-		omv-mkconf git
+        echo "Restart apache2"
+        monit restart apache2
 
-		monit restart apache2
+    ;;
 
-	;;
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
 
-	abort-upgrade|abort-remove|abort-deconfigure)
-	;;
-
-	*)
-		echo "postinst called with unknown argument \`$1'" >&2
-		exit 1
-	;;
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
 esac
 
 # dh_installdeb will replace this with shell code automatically

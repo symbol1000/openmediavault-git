@@ -1,6 +1,5 @@
 <?php
 /**
- * vim: tabstop=4
  *
  * @license    http://www.gnu.org/licenses/gpl.html GPL Version 3
  * @author     Ian Moore <imooreyahoo@gmail.com>
@@ -31,13 +30,13 @@ require_once("openmediavault/util.inc");
 require_once("openmediavault/initscript.inc");
 
 class OMVModuleGit extends OMVModuleServiceAbstract
-    implements OMVINotifyListener, OMVIModuleStatus {
+    implements OMVINotifyListener, OMVIModuleServiceStatus {
 
 	/**
 	 * Get the module name.
 	 */
-	public static function getName() {
-		return "git";
+	public function getName() {
+		return "Git";
 	}
 
 	/**
@@ -120,6 +119,6 @@ class OMVModuleGit extends OMVModuleServiceAbstract
 
 // Register module
 $moduleMgr = &OMVModuleMgr::getInstance();
-$moduleMgr->registerModule(new GitModule());
+$moduleMgr->registerModule(new OMVModuleGit());
 
 ?>
