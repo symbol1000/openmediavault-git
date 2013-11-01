@@ -179,7 +179,7 @@ Ext.define("OMV.module.admin.service.git.Settings", {
                 name: "showtab",
                 fieldLabel: _("Show Tab"),
                 boxLabel: _("Show tab containing GitWeb frame"),
-                checked: true
+                checked: false
             },{
                 xtype: "button",
                 name: "launch-gitweb",
