@@ -1,8 +1,8 @@
-openmediavault-git (0.5) stable; urgency=low
+openmediavault-git (0.5.0.14) stable; urgency=low
 
   * Port to OMV 0.5
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.prg>  Fri, 01 Nov 2013 09:27:27 -0500
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 01 Nov 2013 09:27:27 -0500
 
 openmediavault-git (0.4.1-7~1.gbp98b9d3) stable; urgency=low
 
