@@ -1,3 +1,9 @@
+openmediavault-git (0.5.0.15) stable; urgency=low
+
+  * Gitweb changed to earlier version (Closes: #2 & #3 github)
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Mon, 06 Jan 2014 19:56:00 +0200
+
 openmediavault-git (0.5.0.14) stable; urgency=low
 
   * Port to OMV 0.5
