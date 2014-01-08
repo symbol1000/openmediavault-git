@@ -106,7 +106,8 @@ Ext.define("OMV.module.admin.service.git.Repositories", {
 		"OMV.data.proxy.Rpc"
 	],
 	uses: [
-		"OMV.module.admin.service.git.Repository"
+		"OMV.module.admin.service.git.Repository",
+        "OMV.module.admin.service.git.Privileges" //
 	],
 
 	hidePagingToolbar: false,
@@ -296,7 +297,7 @@ Ext.define("OMV.module.admin.service.git.Privileges", {
 	extend: "OMV.workspace.window.Grid",
 	uses: [
 		"OMV.Rpc",
-		"OMV.grid.Privileges",
+		"OMV.module.admin.service.git.Privileges.grid", //"OMV.grid.Privileges",
 		"OMV.workspace.window.plugin.ConfigObject"
 	],
 
@@ -306,7 +307,7 @@ Ext.define("OMV.module.admin.service.git.Privileges", {
 	plugins: [{
 		ptype: "configobject"
 	}],
-	gridClassName: "OMV.grid.Privileges",
+	gridClassName: "OMV.module.admin.service.git.Privileges.grid", //"OMV.grid.Privileges",
 
 	title: _("Edit privileges"),
 	width: 550,
@@ -317,7 +318,7 @@ Ext.define("OMV.module.admin.service.git.Privileges", {
 		return {
 			border: false,
 			stateful: true,
-			stateId: "475eacf4-cadb-4ae4-b545-4f7f47d7aed9",
+			stateId: "475eacf4-cadb-1234-b545-4f7f47d71234", //"475eacf4-cadb-4ae4-b545-4f7f47d7aed9",
 			readOnly: me.readOnly,
 			uuid: me.uuid
 		};
@@ -347,6 +348,181 @@ Ext.define("OMV.module.admin.service.git.Privileges", {
 		};
 	}
 });
+
+Ext.define("OMV.module.admin.service.git.Privileges.grid", { //OMV.grid.Privileges
+	extend: "OMV.grid.Panel",
+	//alias: [ "widget.privilegesgrid" ],
+	requires: [
+		"Ext.grid.column.CheckColumn",
+		"Ext.grid.feature.Grouping",
+		"OMV.data.Store",
+		"OMV.data.Model",
+		"OMV.data.proxy.Rpc",
+		"OMV.grid.column.BooleanText"
+	],
+
+	autoLoadData: true,
+	readOnly: false,
+	hideSystemColumn: true,
+
+	features: [{
+		ftype: "grouping",
+		groupHeaderTpl: "{renderedGroupValue}"
+	}],
+
+	initComponent: function() {
+		var me = this;
+		Ext.apply(me, {
+			store: Ext.create("OMV.data.Store", {
+				autoLoad: me.autoLoadData,
+				groupField: "system",
+				model: OMV.data.Model.createImplicit({
+					fields: [
+						{ name: "type", type: "string" },
+						{ name: "name", type: "string" },
+						{ name: "perms", type: "int" },
+						{ name: "deny", type: "boolean", defaultValue: null },
+						{ name: "readonly", type: "boolean", defaultValue: null },
+						{ name: "writeable", type: "boolean", defaultValue: null },
+						{ name: "system", type: "boolean" }
+					]
+				}),
+				proxy: {
+					type: "rpc",
+					appendSortParams: false,
+					extraParams: {
+						uuid: me.uuid
+					},
+					rpcData: {
+						service: "Git",
+						method: "getPrivileges"
+					}
+				},
+				sorters: [{
+					direction: "ASC",
+					property: "name"
+				}],
+				listeners: {
+					scope: me,
+					load: function(store, records, successful, eOpts) {
+						Ext.Array.each(records, function(record) {
+							record.beginEdit();
+							switch(record.get("perms")) {
+							case 0:
+								record.set("deny", true);
+								break;
+							case 5:
+								record.set("readonly", true);
+								break;
+							case 7:
+								record.set("writeable", true);
+								break;
+							}
+							record.commit();
+							record.endEdit();
+						});
+						store.commitChanges();
+					}
+				}
+			}),
+			columns: [{
+				text: _("Type"),
+				sortable: true,
+				dataIndex: "type",
+				stateId: "type",
+				align: "center",
+				width: 60,
+				resizable: false,
+				renderer: function(value, metaData) {
+					switch(value) {
+					case "user":
+						metaData.tdAttr = "data-qtip='" + _("User") + "'";
+						value = "<img border='0' src='images/user.png'>";
+						break;
+					case "group":
+						metaData.tdAttr = "data-qtip='" + _("Group") + "'";
+						value = "<img border='0' src='images/group.png'>";
+						break;
+					}
+					return value;
+				}
+			},{
+				text: _("Name"),
+				sortable: true,
+				dataIndex: "name",
+				stateId: "name",
+				flex: 2
+			},{
+				xtype: "checkcolumn",
+				text: _("Read/Write"),
+				sortable: true,
+				groupable: false,
+				dataIndex: "writeable",
+				stateId: "writeable",
+				align: "center",
+				flex: 1,
+				listeners: {
+					scope: me,
+					checkchange: me.onCheckChange
+				}
+			},{
+				xtype: "checkcolumn",
+				text: _("Read-only"),
+				sortable: true,
+				groupable: false,
+				dataIndex: "readonly",
+				stateId: "readonly",
+				align: "center",
+				flex: 1,
+				listeners: {
+					scope: me,
+					checkchange: me.onCheckChange
+				}
+			},{
+				xtype: "checkcolumn",
+				text: _("No access"),
+				sortable: true,
+				groupable: false,
+				dataIndex: "deny",
+				stateId: "deny",
+				align: "center",
+				flex: 1,
+				listeners: {
+					scope: me,
+					checkchange: me.onCheckChange
+				}
+			},{
+				xtype: "booleantextcolumn",
+				text: _("System"),
+				sortable: true,
+				groupable: true,
+				hidden: me.hideSystemColumn,
+				dataIndex: "system",
+				stateId: "system",
+				align: "center",
+				flex: 1
+			}]
+		});
+		me.callParent(arguments);
+	},
+
+	onCheckChange: function(column, rowIndex, checked, eOpts) {
+		var me = this;
+		if(me.readOnly)
+			return;
+		var record = me.store.getAt(rowIndex);
+		var fieldNames = [ "readonly", "writeable", "deny" ];
+		// Clear all other fields except the current selected one.
+		record.beginEdit();
+		Ext.Array.each(fieldNames, function(fieldName) {
+			if(fieldName === column.dataIndex)
+				return;
+			record.set(fieldName, false);
+		});
+		record.endEdit();
+	}
+});
+
 
 OMV.WorkspaceManager.registerPanel({
 	id: "repos",

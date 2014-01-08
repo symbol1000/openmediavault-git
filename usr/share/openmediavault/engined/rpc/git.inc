@@ -320,7 +320,7 @@ class OMVRpcServiceGit extends OMVRpcServiceAbstract {
 		return $object;
 	}
 
-	function getPrivileges($params, $contex) {
+	function getPrivileges($params, $context) {
 		global $xmlConfig;
 		
 		// Validate the RPC caller context.
