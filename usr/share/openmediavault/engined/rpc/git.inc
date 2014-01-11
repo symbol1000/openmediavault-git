@@ -470,7 +470,7 @@ class OMVRpcServiceGit extends OMVRpcServiceAbstract {
 		// Notify configuration changes.
 		$dispatcher = &OMVNotifyDispatcher::getInstance();
 		$dispatcher->notify(OMV_NOTIFY_MODIFY,
-            "org.openmediavault.service.git.repos.repo.privileges",
+            "org.openmediavault.services.git.repos.repo.privileges",
             $object);
 
 		// Return the configuration object.
