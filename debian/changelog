@@ -1,3 +1,9 @@
+openmediavault-git (0.5.0.16) stable; urgency=low
+
+  * Repository privileges work for users and groups  (Closes: #1 & #4 github)
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sat, 11 Jan 2014 23:03:00 +0200
+
 openmediavault-git (0.5.0.15) stable; urgency=low
 
   * Gitweb changed to earlier version (Closes: #2 & #3 github)

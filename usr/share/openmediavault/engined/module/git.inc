@@ -108,6 +108,9 @@ class OMVModuleGit extends OMVModuleServiceAbstract
 		/* Repo events */
 		$dispatcher->addListener(OMV_NOTIFY_CREATE | OMV_NOTIFY_MODIFY, "org.openmediavault.services.git.repos.repo", array($this, "setDirty"), 1);
 
+		/* Listen for repo privileges events */
+		$dispatcher->addListener(OMV_NOTIFY_MODIFY, "org.openmediavault.services.git.repos.repo.privileges", array($this, "setDirty"), 1);
+
 		/* Listen for user events */
 		$dispatcher->addListener(OMV_NOTIFY_CREATE | OMV_NOTIFY_MODIFY, "org.openmediavault.system.usermanagement.users.user", array($this, "setDirty"));
 

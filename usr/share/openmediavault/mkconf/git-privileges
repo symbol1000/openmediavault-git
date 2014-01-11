@@ -91,8 +91,8 @@ do
 	echo "* = ${priv}" >>${OMV_GIT_AUTHZ}
 
 	# Get repository user privileges
-	privileges=$(xmlstarlet sel -t -m "//services/git/repos/repo[uuid='${reporef}']/privileges/privilege[username]" \
-	  -v "concat(perms,'|',//system/usermanagement/users/user[name=current()/username]/name)" -n \
+	privileges=$(xmlstarlet sel -t -m "//services/git/repos/repo[uuid='${reporef}']/privileges/privilege[type='user']" \
+	  -v "concat(perms,'|',name)" -n \
 	  ${OMV_CONFIG_FILE} | xmlstarlet unesc)
 
 	for privilege in ${privileges}
@@ -111,8 +111,8 @@ do
 	done
 
 	# Get repository group privileges
-	privileges=$(xmlstarlet sel -t -m "//services/git/repos/repo[uuid='${reporef}']/privileges/privilege[groupname]" \
-	  -v "concat(perms,'|',//system/usermanagement/groups/group[name=current()/groupname]/name)" -n \
+	privileges=$(xmlstarlet sel -t -m "//services/git/repos/repo[uuid='${reporef}']/privileges/privilege[type='group']" \
+	  -v "concat(perms,'|',name)" -n \
 	  ${OMV_CONFIG_FILE} | xmlstarlet unesc)
 
     for privilege in ${privileges}
