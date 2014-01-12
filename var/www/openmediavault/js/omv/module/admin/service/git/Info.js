@@ -92,6 +92,20 @@ autoLoadData    : false,
                         + 'If you wish to prevent access to a repository for a single user you have to set the value "No access" for the user and every group that the user is in.'
                         + '</p>'
             }]
+        },{
+            /* Gitweb info */
+            xtype : "fieldset",
+            layout : "fit",
+            items : [{
+                border  : false,
+                html    : '<h3>Gitweb</h3>'
+                        + '<p>'
+                        + 'Gitweb is a Git web interface. It enables you to browse through repositories.'
+                        + '</p>'
+                        + '<p>'
+                        + 'Repository privileges do not apply to Gitweb. When enabled all users can see all repositories.'
+                        + '</p>'
+            }]
         }];
     }
 
