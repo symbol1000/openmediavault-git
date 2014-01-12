@@ -83,10 +83,13 @@ autoLoadData    : false,
                         + '</p>'
                         + '<h3>Repository Privileges</h3>'
                         + '<p>'
-                        + 'The privileges settings refers to the users that are setup for your OMV. All connections to the repository are confirmed with username/password.'
+                        + 'The privileges settings refer to the users that are setup for your OMV. All connections to the repository are confirmed with username/password.'
                         + '</p>'
                         + '<p>'
                         + 'Default privilege level affects all OMV users. It is also possible to set privileges for individual OMV users and groups.'
+                        + '</p>'
+                        + '<p>'
+                        + 'If you wish to prevent access to a repository for a single user you have to set the value "No access" for the user and every group that the user is in.'
                         + '</p>'
             }]
         }];
