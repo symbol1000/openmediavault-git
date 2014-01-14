@@ -39,12 +39,11 @@ autoLoadData    : false,
         return [{
             /* Git info */
             xtype : "fieldset",
+	     title: _("Git"),
             layout : "fit",
             items : [{
                 border  : false,
-                html    : '<h3>Git</h3>'
-                        + '<p>'
-                        + 'Git is a distributed version control system.'
+                html    : '<b>Git</b> is a distributed version control system.'
                         + '</p>'
                         + '<h3>First time use</h3>'
                         + '<h4>OMV</h4>'
@@ -71,39 +70,32 @@ autoLoadData    : false,
                         + 'Go to a folder where the repository should be set up as a subdirectory.'
                         + '</li>'
                         + '<li>'
-                        + 'In terminal run: "git clone http://username@192.168.1.123/git/repositoryname" You will be asked for your password. You will also get a warning: "You appear to have cloned an empty repository." This is normal.'
+                        + 'In terminal run: "<b>git clone http://username@192.168.1.123/git/repositoryname</b>" You will be asked for your password. You will also get a warning: "You appear to have cloned an empty repository." This is normal.'
                         + '</li>'
                         + '<li>'
-                        + 'In terminal run: "cd repositoryname". Now you are in your git repository.'
+                        + 'In terminal run: "<b>cd repositoryname</b>". Now you are in your git repository.'
                         + '</li>'
                         + '<li>'
-                        + 'After you have made some changes and commits you want to push your changes to the server. In terminal run: "git push -u origin master". You will be asked for your password.'
+                        + 'After you have made some changes and commits you want to push your changes to the server. In terminal run: "<b>git push -u origin master</b>". You will be asked for your password.'
                         + '</li>'
                         + '</ol>'
                         + '</p>'
                         + '<h3>Repository Privileges</h3>'
                         + '<p>'
-                        + 'The privileges settings refer to the users that are setup for your OMV. All connections to the repository are confirmed with username/password.'
-                        + '</p>'
-                        + '<p>'
-                        + 'Default privilege level affects all OMV users. It is also possible to set privileges for individual OMV users and groups.'
-                        + '</p>'
-                        + '<p>'
+                        + 'The privileges settings refer to the users that are setup for your OMV. All connections to the repository are confirmed with username/password.<br>'
+                        + 'Default privilege level effects all OMV users. It is also possible to set privileges for individual OMV users and groups.<br>'
                         + 'If you wish to prevent access to a repository for a single user you have to set the value "No access" for the user and every group that the user is in.'
                         + '</p>'
             }]
         },{
             /* Gitweb info */
             xtype : "fieldset",
+            title: _("GitWeb"),
             layout : "fit",
             items : [{
                 border  : false,
-                html    : '<h3>Gitweb</h3>'
-                        + '<p>'
-                        + 'Gitweb is a Git web interface. It enables you to browse through repositories.'
-                        + '</p>'
-                        + '<p>'
-                        + 'Repository privileges do not apply to Gitweb. When enabled all users can see all repositories.'
+                html    : '<b>GitWeb</b> is a web interface for Git. It enables you to browse through repositories.<br>'
+                        + 'Repository privileges do not apply to GitWeb. When enabled all users can see all repositories.'
                         + '</p>'
             }]
         }];
