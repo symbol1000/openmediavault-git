@@ -94,7 +94,7 @@ autoLoadData    : false,
             layout : "fit",
             items : [{
                 border  : false,
-                html    : '<b>GitWeb</b> is a web interface for Git. It enables you to browse through repositories.<br>'
+                html    : '<b>GitWeb</b> is a web interface for Git that allows you to browse through repositories.<br>'
                         + 'Repository privileges do not apply to GitWeb. When enabled all users can see all repositories.'
                         + '</p>'
             }]
