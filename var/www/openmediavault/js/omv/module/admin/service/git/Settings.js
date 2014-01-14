@@ -188,6 +188,9 @@ Ext.define("OMV.module.admin.service.git.Settings", {
                 handler: function() {
                     window.open("/git/");
                 }
+            },{
+                border : false,
+                html   : "<p/>"
             }]
         }];
     }
