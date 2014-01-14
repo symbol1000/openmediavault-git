@@ -50,7 +50,7 @@ autoLoadData    : false,
                         + '<p>'
                         + '<ol>'
                         + '<li>'
-                        + 'You must have a user made for your OMV, root can not be used for git http access. To add a user to your OMV go to Access Right Management / User.'
+                        + 'You have to create a user for your OMV, root cannot be used for git http access. To add a user to your OMV go to Access Right Management / User.'
                         + '</li>'
                         + '<li>'
                         + 'Return to Git plugin.'
