@@ -1,5 +1,5 @@
-# openmediavault-git
-# Copyright (C) 2013
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-git\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-01 09:49-0500\n"
+"POT-Creation-Date: 2014-01-15 22:28-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,95 +18,124 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "Add repository"
-msgstr "Add repository"
+msgstr ""
 
 msgid "Allow anonymous access"
-msgstr "Allow anonymous access"
+msgstr ""
 
 msgid "Authentication realm."
-msgstr "Authentication realm."
-
-msgid "Database files will move to new location if database volume is changed."
-msgstr "Database files will move to new location if database volume is changed."
+msgstr ""
 
 msgid "Database Volume"
-msgstr "Database Volume"
+msgstr ""
+
+msgid "Database files will move to new location if database volume is changed."
+msgstr ""
 
 msgid "Default privilege level"
-msgstr "Default privilege level"
+msgstr ""
 
 msgid "Default privileges"
-msgstr "Default privileges"
+msgstr ""
 
 msgid "Description"
-msgstr "Description"
+msgstr ""
 
 msgid "Edit privileges"
-msgstr "Edit privileges"
+msgstr ""
 
 msgid "Edit repository"
-msgstr "Edit repository"
+msgstr ""
 
 msgid "Enable"
-msgstr "Enable"
+msgstr ""
 
 msgid "Enable read-only repository content and history browsing through GitWeb"
-msgstr "Enable read-only repository content and history browsing through GitWeb"
+msgstr ""
 
 msgid "General settings"
-msgstr "General settings"
+msgstr ""
 
 msgid "Git"
-msgstr "Git"
+msgstr ""
+
+msgid "Git Web Service"
+msgstr ""
 
 msgid "GitWeb"
-msgstr "GitWeb"
+msgstr ""
+
+msgid "Group"
+msgstr ""
+
+msgid "Info"
+msgstr ""
 
 msgid "Launch GitWeb"
-msgstr "Launch GitWeb"
+msgstr ""
 
 msgid "Name"
-msgstr "Name"
+msgstr ""
 
 msgid "No access"
-msgstr "No access"
+msgstr ""
 
 msgid "Privileges"
-msgstr "Privileges"
-
-msgid "Read-only"
-msgstr "Read-only"
+msgstr ""
 
 msgid "Read / Write"
-msgstr "Read / Write"
+msgstr ""
+
+msgid "Read-only"
+msgstr ""
+
+msgid "Read/Write"
+msgstr ""
 
 msgid "Realm Name"
-msgstr "Realm Name"
+msgstr ""
 
 msgid "Repositories"
-msgstr "Repositories"
+msgstr ""
 
 msgid "Repository name."
-msgstr "Repository name."
+msgstr ""
 
 msgid "Repository root"
-msgstr "Repository root"
+msgstr ""
 
 msgid "Select a volume ..."
-msgstr "Select a volume ..."
+msgstr ""
 
 msgid "Settings"
-msgstr "Settings"
+msgstr ""
 
 msgid "Show Tab"
-msgstr "Show Tab"
+msgstr ""
 
 msgid "Show tab containing GitWeb frame"
-msgstr "Show tab containing GitWeb frame"
+msgstr ""
+
+msgid "System"
+msgstr ""
+
+msgid "The group '%s' does not exist"
+msgstr ""
+
+msgid "The user '%s' does not exist"
+msgstr ""
+
+msgid "The user '%s' is not allowed"
+msgstr ""
+
+msgid "Type"
+msgstr ""
 
 msgid "URL"
-msgstr "URL"
+msgstr ""
+
+msgid "User"
+msgstr ""
 
 msgid "Users do not have to log in to view GitWeb"
-msgstr "Users do not have to log in to view GitWeb"
-
+msgstr ""
