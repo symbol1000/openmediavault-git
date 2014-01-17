@@ -28,12 +28,47 @@ set -e
 
 OMV_GIT_AUTHZ=${OMV_GIT_AUTHZ:-"/etc/git/authz"}
 
+# Get Repo root directory
+reporootdir=$(omv_config_get "//services/git/repository-root")
+
+# Wipe all acl entries from reporoot recursively except the default (www-data)
+setfacl -b -R $reporootdir 
+
+# Chmod repo root directory so users can "cd" into repos
+chmod o=x $reporootdir
 
 # Just exit if service is disabled
 if [ "$(omv_config_get "//services/git/enable")" = "0" ]; then
         exit 0
 fi
 
+#########################################
+# Create a git folder and symlinks to repos if homedirectories are enabled
+#########################################
+homedirenabled=$(omv_config_get "//system/usermanagement/homedirectory/enable")
+homedirroot=$(omv_get_sharedfolder_path $(omv_config_get "//system/usermanagement/homedirectory/sharedfolderref"))
+if [ "$homedirenabled" = "1" ]; then
+    index=$(omv_config_get_count "//system/usermanagement/users/user")
+    while [ ${index} -gt 0 ]
+    do
+            user=$(omv_config_get "//system/usermanagement/users/user[position()=${index}]/name")
+            usergitdir=$homedirroot/$user/git
+            
+            if [ ! -d "$usergitdir" ]; then
+                mkdir $usergitdir
+                chown $user $usergitdir
+            else
+                # Loop through files and delete all symlinks
+                for f in $usergitdir/*
+                do
+                    if [ -L "$f" ]; then
+                        rm $f
+                    fi
+                done
+            fi
+            index=$(( ${index} - 1 ))
+    done
+fi
 
 # Add groups. Yes, I do not like xpath. If there is a simpler way
 # to do this without having to rely on /etc/group, I would love to
@@ -66,7 +101,10 @@ EOF
 index=$(omv_config_get_count "//services/git/repos/repo")
 while [ ${index} -gt 0 ]
 do
-
+    #Get repo directory for ACL setting
+    reponame=$(omv_config_get "//services/git/repos/repo[position()=${index}]/name")
+    repodir=$reporootdir/$reponame
+    
 	echo '' >>${OMV_GIT_AUTHZ}
 
 	# Get the repository reference and path
@@ -89,47 +127,106 @@ do
 	esac
 
 	echo "* = ${priv}" >>${OMV_GIT_AUTHZ}
-
-	# Get repository user privileges
-	privileges=$(xmlstarlet sel -t -m "//services/git/repos/repo[uuid='${reporef}']/privileges/privilege[type='user']" \
-	  -v "concat(perms,'|',name)" -n \
-	  ${OMV_CONFIG_FILE} | xmlstarlet unesc)
-
-	for privilege in ${privileges}
-	do
-        perm=''
-		perms=${privilege%|*}
-		name=${privilege#*|}
-		# Append user to list
-		case ${perms} in
-		5)
-			perm='r';;
-		7)
-			perm='rw';;
-		esac
-        echo "${name} = ${perm}" >>${OMV_GIT_AUTHZ}
-	done
-
-	# Get repository group privileges
-	privileges=$(xmlstarlet sel -t -m "//services/git/repos/repo[uuid='${reporef}']/privileges/privilege[type='group']" \
-	  -v "concat(perms,'|',name)" -n \
-	  ${OMV_CONFIG_FILE} | xmlstarlet unesc)
-
-    for privilege in ${privileges}
+    
+#########################################
+# Set default user acl privileges for repo directory
+#########################################
+    index=$(omv_config_get_count "//system/usermanagement/users/user")
+    while [ ${index} -gt 0 ]
     do
-        perm=''
-        perms=${privilege%|*}
-        name=${privilege#*|}
-        # Append user to list
-        case ${perms} in
-            5)
-                perm='r';;
-            7)
-                perm='rw';;
-        esac
-        echo "@${name} = ${perm}" >>${OMV_GIT_AUTHZ}
+            user=$(omv_config_get "//system/usermanagement/users/user[position()=${index}]/name")
+            case ${dpriv} in
+            "read-only")
+                setfacl -m u:$user:rx $repodir
+                ;;
+            "write")
+                setfacl -m u:$user:rwx $repodir
+                ;;
+            esac
+            if [ "$homedirenabled" = "1" ] && ([ "$dpriv" = "read-only" ] || [ "$dpriv" = "write" ]); then 
+                    ln -sn $repodir $homedirroot/$user/git
+            fi
+            index=$(( ${index} - 1 ))
+    done
+    
+#########################################
+# Set default group acl privileges for repo directory
+#########################################
+    index=$(omv_config_get_count "//system/usermanagement/groups/group")
+    while [ ${index} -gt 0 ]
+    do
+            group=$(omv_config_get "//system/usermanagement/groups/group[position()=${index}]/name")
+            case ${dpriv} in
+            "read-only")
+                setfacl -m g:$group:rx $repodir
+                ;;
+            "write")
+                setfacl -m g:$group:rwx $repodir
+                ;;
+            esac
+               
+            index=$(( ${index} - 1 ))
     done
 
+#########################################
+# Check user/group privileges for repo
+# Only if default privilege level is not write
+#########################################
+    if ! [ "$dpriv" = "write" ]; then
+        # Get repository user privileges
+        privileges=$(xmlstarlet sel -t -m "//services/git/repos/repo[uuid='${reporef}']/privileges/privilege[type='user']" \
+          -v "concat(perms,'|',name)" -n \
+          ${OMV_CONFIG_FILE} | xmlstarlet unesc)
+
+        for privilege in ${privileges}
+        do
+            perm=''
+            perms=${privilege%|*}
+            name=${privilege#*|}
+            # Append user to list
+            case ${perms} in
+                5)
+                    perm='r'
+                    setfacl -m u:$name:rx $repodir # Set folder ACL for ssh use
+                    ;;
+                7)
+                    perm='rw'
+                    setfacl -m u:$name:rwx $repodir # Set folder ACL for ssh use
+                    ;;
+            esac
+            # If userhomedirectories are enabled and repo symlink has not been made then make it
+            if [ "$homedirenabled" = "1" ] && [ ! -L $homedirroot/$user/git/$reponame ] && ([ ${perms} = 5 ] || [ ${perms} = 7 ]); then
+               ln -sn $repodir $homedirroot/$user/git
+            fi
+            echo "${name} = ${perm}" >>${OMV_GIT_AUTHZ}
+        done
+
+        # Get repository group privileges
+        privileges=$(xmlstarlet sel -t -m "//services/git/repos/repo[uuid='${reporef}']/privileges/privilege[type='group']" \
+          -v "concat(perms,'|',name)" -n \
+          ${OMV_CONFIG_FILE} | xmlstarlet unesc)
+
+        for privilege in ${privileges}
+        do
+            perm=''
+            perms=${privilege%|*}
+            name=${privilege#*|}
+            # Append user to list
+            case ${perms} in
+                5)
+                    perm='r'
+                    setfacl -m g:$name:rx $repodir # Set folder ACL for ssh use
+                    ;;
+                7)
+                    perm='rw'
+                    setfacl -m g:$name:rwx $repodir # Set folder ACL for ssh use
+                    ;;
+            esac
+            # TODO: Add loop through members of the group and make symlinks to their folders
+            # If userhomedirectories are enabled and repo symlink has not been made then make it
+            echo "@${name} = ${perm}" >>${OMV_GIT_AUTHZ}
+        done
+    fi
 	index=$(( ${index} - 1 ))
 done
 
