@@ -199,8 +199,8 @@ do
                     ;;
             esac
             # If userhomedirectories are enabled and repo symlink has not been made then make it
-            if [ "$homedirenabled" = "1" ] && [ ! -L $homedirroot/$user/git/$reponame ] && ([ ${perms} = 5 ] || [ ${perms} = 7 ]); then
-               ln -sn $repodir $homedirroot/$user/git
+            if [ "$homedirenabled" = "1" ] && [ ! -L $homedirroot/$name/git/$reponame ] && ([ ${perms} = 5 ] || [ ${perms} = 7 ]); then
+               ln -sn $repodir $homedirroot/$name/git
             fi
             echo "${name} = ${perm}" >>${OMV_GIT_AUTHZ}
         done
