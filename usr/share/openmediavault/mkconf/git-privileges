@@ -43,9 +43,13 @@ if [ "$(omv_config_get "//services/git/enable")" = "0" ]; then
 fi
 
 #########################################
-# Create a git folder and symlinks to repos if homedirectories are enabled
+# Create a git folder and symlinks to repos if homedirectories and symlinks are enabled
 #########################################
 homedirenabled=$(omv_config_get "//system/usermanagement/homedirectory/enable")
+if [ "$homedirenabled" = "1" ]; then
+    homedirenabled=$(omv_config_get "//services/git/symlinks-enable")
+fi
+
 homedirroot=$(omv_get_sharedfolder_path $(omv_config_get "//system/usermanagement/homedirectory/sharedfolderref"))
 if [ "$homedirenabled" = "1" ]; then
     index=$(omv_config_get_count "//system/usermanagement/users/user")

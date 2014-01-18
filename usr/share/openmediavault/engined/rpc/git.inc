@@ -62,6 +62,7 @@ class OMVRpcServiceGit extends OMVRpcServiceAbstract {
 
 		// Modify the result object.
 		$object['enable'] = boolval($object['enable']);
+        $object['symlinks-enable'] = boolval($object['symlinks-enable']);
         $object['gitweb-enable'] = boolval($object['gitweb-enable']);
         $object['gitweb-anon'] = boolval($object['gitweb-anon']);
 		$object['showtab'] = boolval($object['showtab']);
@@ -79,6 +80,7 @@ class OMVRpcServiceGit extends OMVRpcServiceAbstract {
 			"type":"object",
 			"properties":{
                 "enable":{"type":"boolean"},
+                "symlinks-enable":{"type":"boolean"},
 				"gitweb-enable":{"type":"boolean"},
 				"gitweb-anon":{"type":"boolean"},
 				"realm":{"type":"string"},
@@ -117,6 +119,7 @@ class OMVRpcServiceGit extends OMVRpcServiceAbstract {
         // Prepare configuration data
         $object = array(
             "enable" => array_boolval($params, 'enable'),
+            "symlinks-enable" => array_boolval($params, 'symlinks-enable'),
             "gitweb-enable" => array_boolval($params, 'gitweb-enable'),
             "gitweb-anon" => array_boolval($params, 'gitweb-anon'),
 			"realm" => $params['realm'],

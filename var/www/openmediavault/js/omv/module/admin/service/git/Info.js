@@ -86,6 +86,12 @@ autoLoadData    : false,
                         + 'Default privilege level effects all OMV users. It is also possible to set privileges for individual OMV users and groups.<br>'
                         + 'If you wish to prevent access to a repository for a single user you have to set the value "No access" for the user and every group that the user is in.'
                         + '</p>'
+                        + '<h3>SSH Access</h3>'
+                        + '<p>'
+                        + 'In order to access repositories via SSH the user must be added to the SSH group. This is done in Access Right Management / User.<br>'
+                        + 'Example of cloning a repository via SSH: "<b>git clone username@192.168.1.123:git/repositoryname</b>. You will be asked for your password."
+                        + '</p>'
+
             }]
         },{
             /* Gitweb info */

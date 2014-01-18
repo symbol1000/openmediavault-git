@@ -30,16 +30,47 @@ case "$1" in
         
         # Check for XML config
         if ! omv_config_exists "/config/services/git"; then
-            object="<enable>0</enable>"
-            object="${object}<mntentref></mntentref>"
-            object="${object}<realm>Git Repositories on OMV</realm>"
-            object="${object}<repository-root></repository-root>"
-            object="${object}<repos></repos>"
-            object="${object}<gitweb-enable>0</gitweb-enable>"
-            object="${object}<gitweb-anon>0</gitweb-anon>"
-            object="${object}<showtab>0</showtab>"
-            omv_config_add_element "/config/services" "git" "${object}" true        
+    	    echo "Initialize Git plugin configuration"
+            ENABLE="0"
+            SYMLINKS_ENABLE="0"
+            MNTENTREF=""
+            REALM="Git Repositories on OMV"
+            REPOSITORY_ROOT=""
+            REPOS=""
+            GITWEB_ENABLE="0"
+            GITWEB_ANON="0"
+            SHOWTAB="0"
+        else
+            echo "Importing previous configuration"
+            ENABLE="$(omv_config_get "/config/services/git/enable")"
+
+            if ! omv_config_exists "/config/services/git/symlinks-enable"; then
+                SYMLINKS_ENABLE="0"
+            else
+                SYMLINKS_ENABLE="$(omv_config_get "/config/services/git/symlinks-enable")"
+            fi
+
+            MNTENTREF="$(omv_config_get "/config/services/git/mntentref")"
+            REALM="$(omv_config_get "/config/services/git/realm")"
+            REPOSITORY_ROOT="$(omv_config_get "/config/services/git/repository-root")"
+            REPOS="$(omv_config_get "/config/services/git/repos")"
+            GITWEB_ENABLE="$(omv_config_get "/config/services/git/gitweb-enable")"
+            GITWEB_ANON="$(omv_config_get "/config/services/git/gitweb-anon")"
+            SHOWTAB="$(omv_config_get "/config/services/git/showtab")"
         fi
+
+        omv_config_delete "/config/services/git"
+        
+        object="<enable>${ENABLE}</enable>"
+        object="<symlinks-enable>${SYMLINKS_ENABLE}</symlinks-enable>"
+        object="${object}<mntentref>${MNTENTREF}</mntentref>"
+        object="${object}<realm>${REALM}</realm>"
+        object="${object}<repository-root>${REPOSITORY_ROOT}</repository-root>"
+        object="${object}<repos>${REPOS}</repos>"
+        object="${object}<gitweb-enable>${GITWEB_ENABLE}</gitweb-enable>"
+        object="${object}<gitweb-anon>${GITWEB_ANON}</gitweb-anon>"
+        object="${object}<showtab>${SHOWTAB}</showtab>"
+        omv_config_add_element "/config/services" "git" "${object}" true
 
         chown -R openmediavault:openmediavault /var/www/gitweb
 

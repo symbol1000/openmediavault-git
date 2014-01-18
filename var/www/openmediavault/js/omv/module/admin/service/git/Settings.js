@@ -102,6 +102,12 @@ Ext.define("OMV.module.admin.service.git.Settings", {
                 fieldLabel: _("Enable"),
                 checked: false
             },{
+                xtype: "checkbox",
+                name: "symlinks-enable",
+                fieldLabel: _("Symbolic links"),
+                boxLabel: _("Enable automatic creation of symbolic links in users homefolder to permitted repositories."),
+                checked: false
+            },{
                 xtype: "textfield",
                 name: "realm",
                 fieldLabel: _("Realm Name"),
