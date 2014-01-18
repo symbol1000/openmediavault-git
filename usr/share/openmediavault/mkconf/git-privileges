@@ -137,10 +137,10 @@ do
             user=$(omv_config_get "//system/usermanagement/users/user[position()=${index}]/name")
             case ${dpriv} in
             "read-only")
-                setfacl -m u:$user:rx $repodir
+                setfacl -R -m u:$user:rx $repodir
                 ;;
             "write")
-                setfacl -m u:$user:rwx $repodir
+                setfacl -R -m u:$user:rwx $repodir
                 ;;
             esac
             if [ "$homedirenabled" = "1" ] && ([ "$dpriv" = "read-only" ] || [ "$dpriv" = "write" ]); then 
@@ -158,10 +158,10 @@ do
             group=$(omv_config_get "//system/usermanagement/groups/group[position()=${index}]/name")
             case ${dpriv} in
             "read-only")
-                setfacl -m g:$group:rx $repodir
+                setfacl -R -m g:$group:rx $repodir
                 ;;
             "write")
-                setfacl -m g:$group:rwx $repodir
+                setfacl -R -m g:$group:rwx $repodir
                 ;;
             esac
                
@@ -187,11 +187,11 @@ do
             case ${perms} in
                 5)
                     perm='r'
-                    setfacl -m u:$name:rx $repodir # Set folder ACL for ssh use
+                    setfacl -R -m u:$name:rx $repodir # Set folder ACL for ssh use
                     ;;
                 7)
                     perm='rw'
-                    setfacl -m u:$name:rwx $repodir # Set folder ACL for ssh use
+                    setfacl -R -m u:$name:rwx $repodir # Set folder ACL for ssh use
                     ;;
             esac
             # If userhomedirectories are enabled and repo symlink has not been made then make it
@@ -215,15 +215,21 @@ do
             case ${perms} in
                 5)
                     perm='r'
-                    setfacl -m g:$name:rx $repodir # Set folder ACL for ssh use
+                    setfacl -R -m g:$name:rx $repodir # Set folder ACL for ssh use
                     ;;
                 7)
                     perm='rw'
-                    setfacl -m g:$name:rwx $repodir # Set folder ACL for ssh use
+                    setfacl -R -m g:$name:rwx $repodir # Set folder ACL for ssh use
                     ;;
             esac
-            # TODO: Add loop through members of the group and make symlinks to their folders
-            # If userhomedirectories are enabled and repo symlink has not been made then make it
+            # Loop through members of the group and make symlinks to their folders
+            usersofgroup=$(grep ^$name /etc/group | cut -f4 -d':' | sed s/,/\ /g)
+            for user in $usersofgroup; 
+            do  # If userhomedirectories are enabled and repo symlink has not been made then make it
+                if [ "$homedirenabled" = "1" ] && [ ! -L $homedirroot/$user/git/$reponame ] && ([ ${perms} = 5 ] || [ ${perms} = 7 ]); then
+                    ln -sn $repodir $homedirroot/$user/git
+                fi
+            done
             echo "@${name} = ${perm}" >>${OMV_GIT_AUTHZ}
         done
     fi
