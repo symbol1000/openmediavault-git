@@ -7,7 +7,7 @@ Standards-Version: 3.9.3
 
 Package: openmediavault-git
 Architecture: all
-Depends: ${misc:Depends}, openmediavault (>= 0.5.14), apache2.2-common, git, git-core, libapache2-svn,
+Depends: ${misc:Depends}, openmediavault (>= 0.5.14), openmediavault (<< 0.6), apache2.2-common, git, git-core, libapache2-svn,
  libapache2-mod-authnz-external, pwauth, perl
 Description: OpenMediaVault Git (Git server) plugin
  Run a git server through OMV's apache2. Create and manage
