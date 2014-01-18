@@ -63,7 +63,7 @@ autoLoadData    : false,
                         + '</li>'
                         + '</ol>'
                         + '</p>'
-                        + '<div style="padding-left: 20px;"<b><h4>Linux workstation</h4></b></div>'
+                        + '<div style="padding-left: 20px;"<b><h4>Linux workstation http access</h4></b></div>'
                         + '<p>'
                         + '<ol>'
                         + '<li>'
@@ -89,7 +89,9 @@ autoLoadData    : false,
                         + '<h3>SSH Access</h3>'
                         + '<p>'
                         + 'In order to access repositories via SSH the user must be added to the SSH group. This is done in Access Right Management / User.<br>'
-                        + 'Example of cloning a repository via SSH: "<b>git clone username@192.168.1.123:git/repositoryname</b>. You will be asked for your password."
+                        + 'Example of cloning a repository via SSH when symbolic links option is enabled: "<b>git clone username@192.168.1.123:git/repositoryname</b>".<br>'
+                        + 'Example of cloning a repository via SSH when symbolic links option is disabled: "<b>git clone username@192.168.1.123:/full/path/to/repositoryroot/repositoryname</b>".<br>'
+                        + 'You will be asked for your password.'
                         + '</p>'
 
             }]
