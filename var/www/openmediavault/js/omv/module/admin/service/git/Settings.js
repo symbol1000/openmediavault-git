@@ -153,7 +153,7 @@ Ext.define("OMV.module.admin.service.git.Settings", {
                 }),
                 plugins: [{
                     ptype: "fieldinfo",
-                    text: _("Database files will move to new location if database volume is changed.")
+                    text: _("Database has to be empty if database volume is changed.")
                 }]
             },{
                 xtype: "textfield",

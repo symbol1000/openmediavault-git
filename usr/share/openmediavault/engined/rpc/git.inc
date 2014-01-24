@@ -101,7 +101,7 @@ class OMVRpcServiceGit extends OMVRpcServiceAbstract {
         
 		// Don't change repo root if we have existing repos
 		if (is_array($econf['repos']) && count($econf['repos']) && $econf['repository-root'] != $params['repository-root']) {
-			throw new Exception("Refusing to chnage repository root while repositories exist.");
+			throw new Exception("Refusing to change repository root while repositories exist.");
 		}
 
 		// Create repo root
