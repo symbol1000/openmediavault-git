@@ -271,6 +271,14 @@ class OMVRpcServiceGit extends OMVRpcServiceAbstract {
 			// Append object to configuration
 			$success = $xmlConfig->set("//services/git/repos", array("repo" => $object));
 		} else {
+            // Get old user/group privileges
+            $oldPrivilegesXPath = sprintf("//services/git/repos/repo[uuid='%s']/privileges", $params['uuid']);
+            $oldprivileges = $xmlConfig->get($oldPrivilegesXPath);
+            if (is_null($oldprivileges))
+                throw new OMVException(OMVErrorMsg::E_CONFIG_GET_OBJECT_FAILED, $oldPrivilegesXPath);
+
+			// add perms array
+			$object['privileges'] = $oldprivileges;
 			// Update existing configuration object
 			$success = $xmlConfig->replace("//services/git/repos/repo[uuid='{$params['uuid']}']", $object);
 

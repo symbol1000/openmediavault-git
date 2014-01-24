@@ -2,8 +2,9 @@ openmediavault-git (0.5.2) stable; urgency=low
 
   * Folder ACLs and symlinks to repos for SSH use (Closes: #5 github)
   * Added check that User/Group has to exist before privileges are set (Closes: #7 github)
+  * Apply old user/group privileges when modifying the default privilege level. (Closes: #9 github)
 
- -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 24 Jan 2014 22:15:00 +0200
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Fri, 24 Jan 2014 23:30:00 +0200
 
 openmediavault-git (0.5.1) stable; urgency=low
 
