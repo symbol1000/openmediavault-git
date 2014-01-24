@@ -187,22 +187,24 @@ do
             perm=''
             perms=${privilege%|*}
             name=${privilege#*|}
-            # Append user to list
-            case ${perms} in
-                5)
-                    perm='r'
-                    setfacl -R -m u:$name:rx $repodir # Set folder ACL for ssh use
-                    ;;
-                7)
-                    perm='rw'
-                    setfacl -R -m u:$name:rwx $repodir # Set folder ACL for ssh use
-                    ;;
-            esac
-            # If userhomedirectories are enabled and repo symlink has not been made then make it
-            if [ "$homedirenabled" = "1" ] && [ ! -L $homedirroot/$name/git/$reponame ] && ([ ${perms} = 5 ] || [ ${perms} = 7 ]); then
-               ln -sn $repodir $homedirroot/$name/git
+            if [ $(getent passwd $name) ]; then
+                # Append user to list
+                case ${perms} in
+                    5)
+                        perm='r'
+                        setfacl -R -m u:$name:rx $repodir # Set folder ACL for ssh use
+                        ;;
+                    7)
+                        perm='rw'
+                        setfacl -R -m u:$name:rwx $repodir # Set folder ACL for ssh use
+                        ;;
+                esac
+                # If userhomedirectories are enabled and repo symlink has not been made then make it
+                if [ "$homedirenabled" = "1" ] && [ ! -L $homedirroot/$name/git/$reponame ] && ([ ${perms} = 5 ] || [ ${perms} = 7 ]); then
+                   ln -sn $repodir $homedirroot/$name/git
+                fi
+                echo "${name} = ${perm}" >>${OMV_GIT_AUTHZ}
             fi
-            echo "${name} = ${perm}" >>${OMV_GIT_AUTHZ}
         done
 
         # Get repository group privileges
@@ -215,26 +217,28 @@ do
             perm=''
             perms=${privilege%|*}
             name=${privilege#*|}
-            # Append user to list
-            case ${perms} in
-                5)
-                    perm='r'
-                    setfacl -R -m g:$name:rx $repodir # Set folder ACL for ssh use
-                    ;;
-                7)
-                    perm='rw'
-                    setfacl -R -m g:$name:rwx $repodir # Set folder ACL for ssh use
-                    ;;
-            esac
-            # Loop through members of the group and make symlinks to their folders
-            usersofgroup=$(grep ^$name /etc/group | cut -f4 -d':' | sed s/,/\ /g)
-            for user in $usersofgroup; 
-            do  # If userhomedirectories are enabled and repo symlink has not been made then make it
-                if [ "$homedirenabled" = "1" ] && [ ! -L $homedirroot/$user/git/$reponame ] && ([ ${perms} = 5 ] || [ ${perms} = 7 ]); then
-                    ln -sn $repodir $homedirroot/$user/git
-                fi
-            done
-            echo "@${name} = ${perm}" >>${OMV_GIT_AUTHZ}
+            if [ $(getent group $name) ]; then
+                # Append user to list
+                case ${perms} in
+                    5)
+                        perm='r'
+                        setfacl -R -m g:$name:rx $repodir # Set folder ACL for ssh use
+                        ;;
+                    7)
+                        perm='rw'
+                        setfacl -R -m g:$name:rwx $repodir # Set folder ACL for ssh use
+                        ;;
+                esac
+                # Loop through members of the group and make symlinks to their folders
+                usersofgroup=$(grep ^$name /etc/group | cut -f4 -d':' | sed s/,/\ /g)
+                for user in $usersofgroup; 
+                do  # If userhomedirectories are enabled and repo symlink has not been made then make it
+                    if [ "$homedirenabled" = "1" ] && [ ! -L $homedirroot/$user/git/$reponame ] && ([ ${perms} = 5 ] || [ ${perms} = 7 ]); then
+                        ln -sn $repodir $homedirroot/$user/git
+                    fi
+                done
+                echo "@${name} = ${perm}" >>${OMV_GIT_AUTHZ}
+            fi
         done
     fi
 	index=$(( ${index} - 1 ))
