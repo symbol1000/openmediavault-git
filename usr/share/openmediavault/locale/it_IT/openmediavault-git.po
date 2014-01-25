@@ -1,0 +1,151 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# polxmod <paolo.velati@gmail.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: openmediavault-git\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-25 10:11-0600\n"
+"PO-Revision-Date: 2014-01-25 16:11+0000\n"
+"Last-Translator: ryecoaaron <aaron27@ryecoinc.com>\n"
+"Language-Team: Italian (http://www.transifex.com/projects/p/openmediavault-git/language/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Add repository"
+msgstr "Aggiungi repository"
+
+msgid "Allow anonymous access"
+msgstr "Permetti accesso anonimo"
+
+msgid "Authentication realm."
+msgstr "Ambito di autenticazione."
+
+msgid "Database Volume"
+msgstr "Volume Database"
+
+msgid "Database has to be empty if database volume is changed."
+msgstr ""
+
+msgid "Default privilege level"
+msgstr "Livello privilegio Database"
+
+msgid "Default privileges"
+msgstr "Privilegi predefiniti"
+
+msgid "Description"
+msgstr "Descrizione"
+
+msgid "Edit privileges"
+msgstr "Modifica privilegi"
+
+msgid "Edit repository"
+msgstr "Modifica repository"
+
+msgid "Enable"
+msgstr "Abilita"
+
+msgid ""
+"Enable automatic creation of symbolic links in users homefolder to permitted"
+" repositories."
+msgstr ""
+
+msgid ""
+"Enable read-only repository content and history browsing through GitWeb"
+msgstr "Abilita il contenuto del repository e la navigazione history attraverso GitWeb in sola lettura"
+
+msgid "General settings"
+msgstr "Impostazioni generali"
+
+msgid "Git"
+msgstr "Git"
+
+msgid "Git Web Service"
+msgstr "Servizio Web Git"
+
+msgid "GitWeb"
+msgstr "GitWeb"
+
+msgid "Group"
+msgstr "Gruppo"
+
+msgid "Info"
+msgstr "Info"
+
+msgid "Launch GitWeb"
+msgstr "Avvia GitWeb"
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "No access"
+msgstr "Nessun accesso"
+
+msgid "Privileges"
+msgstr "Privilegi"
+
+msgid "Read / Write"
+msgstr "Lettura / Scrittura"
+
+msgid "Read-only"
+msgstr "Sola lettura"
+
+msgid "Read/Write"
+msgstr "Lettura/Scrittura"
+
+msgid "Realm Name"
+msgstr "Nome Ambito"
+
+msgid "Repositories"
+msgstr "Repository"
+
+msgid "Repository name."
+msgstr "Nome Repository."
+
+msgid "Repository root"
+msgstr "Radice repository"
+
+msgid "Select a volume ..."
+msgstr "Seleziona un volume ..."
+
+msgid "Settings"
+msgstr "Impostazioni"
+
+msgid "Show Tab"
+msgstr "Mostra Pannello"
+
+msgid "Show tab containing GitWeb frame"
+msgstr "Mostra pannello contenente GitWeb"
+
+msgid "Symbolic links"
+msgstr ""
+
+msgid "System"
+msgstr "Sistema"
+
+msgid "The group '%s' does not exist"
+msgstr "Il gruppo '%s' non esiste"
+
+msgid "The user '%s' does not exist"
+msgstr "L'utente '%s' non esiste"
+
+msgid "The user '%s' is not allowed"
+msgstr "L'utente '%s' non è autorizzato"
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "User"
+msgstr "Utente"
+
+msgid "Users do not have to log in to view GitWeb"
+msgstr "Gli utenti non devono leggarsi per vedere GitWeb"

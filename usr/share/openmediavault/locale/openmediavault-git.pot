@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-git\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-15 22:28-0600\n"
+"POT-Creation-Date: 2014-01-25 10:11-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Database Volume"
 msgstr ""
 
-msgid "Database files will move to new location if database volume is changed."
+msgid "Database has to be empty if database volume is changed."
 msgstr ""
 
 msgid "Default privilege level"
@@ -48,6 +48,9 @@ msgid "Edit repository"
 msgstr ""
 
 msgid "Enable"
+msgstr ""
+
+msgid "Enable automatic creation of symbolic links in users homefolder to permitted repositories."
 msgstr ""
 
 msgid "Enable read-only repository content and history browsing through GitWeb"
@@ -114,6 +117,9 @@ msgid "Show Tab"
 msgstr ""
 
 msgid "Show tab containing GitWeb frame"
+msgstr ""
+
+msgid "Symbolic links"
 msgstr ""
 
 msgid "System"
