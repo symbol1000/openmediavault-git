@@ -93,6 +93,26 @@ autoLoadData    : false,
                         + 'Example of cloning a repository via SSH when symbolic links option is disabled: "<b>git clone username@192.168.1.123:/full/path/to/repositoryroot/repositoryname</b>".<br>'
                         + 'You will be asked for your password.'
                         + '</p>'
+                        + '<h3>Removal</h3>'
+                        + '<p>'
+                        + 'If you remove this plugin your repositories and their files will not be removed automatically.<br>'
+                        + 'Inorder to remove the repository files follow this procedure:'
+                        + '</p>'
+                        + '<ol>'
+                        + '<li>'
+                        + 'Go to Access Right Management / Shared Folders.'
+                        + '</li>'
+                        + '<li>'
+                        + 'Select Add a new shared folder.'
+                        + '</li>'
+                        + '<li>'
+                        + 'Select the Volume and path to match the git repositories folder.'
+                        + '</li>'
+                        + '<li>'
+                        + 'Delete the shared folder recursively.'
+                        + '</li>'
+                        + '</ol>'
+
 
             }]
         },{
