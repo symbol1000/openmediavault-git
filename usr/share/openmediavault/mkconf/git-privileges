@@ -31,16 +31,16 @@ OMV_GIT_AUTHZ=${OMV_GIT_AUTHZ:-"/etc/git/authz"}
 # Get Repo root directory
 reporootdir=$(omv_config_get "//services/git/repository-root")
 
+# Just exit if service is disabled
+if [ "$(omv_config_get "//services/git/enable")" = "0" ]; then
+        exit 0
+fi
+
 # Wipe all acl entries from reporoot recursively except the default (www-data)
 setfacl -b -R $reporootdir 
 
 # Chmod repo root directory so users can "cd" into repos
 chmod o=x $reporootdir
-
-# Just exit if service is disabled
-if [ "$(omv_config_get "//services/git/enable")" = "0" ]; then
-        exit 0
-fi
 
 #########################################
 # Create a git folder and symlinks to repos if homedirectories and symlinks are enabled
