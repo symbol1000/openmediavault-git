@@ -1,3 +1,11 @@
+openmediavault-git (0.5.3) stable; urgency=low
+
+  * Fix github issue #9
+  * Fix github issue #10
+  * Update locales
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Wed, 26 Feb 2014 21:11:00 -0500
+
 openmediavault-git (0.5.2) stable; urgency=low
 
   * Folder ACLs and symlinks to repos for SSH use (Closes: #5 github)

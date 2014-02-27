@@ -27,7 +27,7 @@ set -e
 case "$1" in
     configure)
         echo "Initialize configuration"
-        
+
         # Check for XML config
         if ! omv_config_exists "/config/services/git"; then
     	    echo "Initialize Git plugin configuration"
@@ -60,9 +60,9 @@ case "$1" in
         fi
 
         omv_config_delete "/config/services/git"
-        
+
         object="<enable>${ENABLE}</enable>"
-        object="<symlinks-enable>${SYMLINKS_ENABLE}</symlinks-enable>"
+        object="${object}<symlinks-enable>${SYMLINKS_ENABLE}</symlinks-enable>"
         object="${object}<mntentref>${MNTENTREF}</mntentref>"
         object="${object}<realm>${REALM}</realm>"
         object="${object}<repository-root>${REPOSITORY_ROOT}</repository-root>"
@@ -115,7 +115,7 @@ case "$1" in
         # Enable required apache modules
         echo "Enable apache modules"
         a2enmod authnz_external dav_svn dav_fs
-        
+
         echo "Clean up old installation"
         # Clean up old installation?
         if [ -f /etc/apache2/conf.d/omv-git ]; then
