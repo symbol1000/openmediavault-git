@@ -3,149 +3,149 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Paolo Velati <paolo.velati@gmail.com>, 2014
+# benitude <benjamin.wuthrich@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-git\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-25 10:11-0600\n"
-"PO-Revision-Date: 2014-02-11 23:25+0000\n"
-"Last-Translator: Paolo Velati <paolo.velati@gmail.com>\n"
-"Language-Team: Italian (http://www.transifex.com/projects/p/openmediavault-git/language/it/)\n"
+"PO-Revision-Date: 2014-02-12 08:58+0000\n"
+"Last-Translator: benitude <benjamin.wuthrich@gmail.com>\n"
+"Language-Team: French (http://www.transifex.com/projects/p/openmediavault-git/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 msgid "Add repository"
-msgstr "Aggiungi repository"
+msgstr "Ajouter un dépot"
 
 msgid "Allow anonymous access"
-msgstr "Permetti accesso anonimo"
+msgstr "Autoriser accès anonyme"
 
 msgid "Authentication realm."
-msgstr "Ambito di autenticazione."
+msgstr "Authentification locale."
 
 msgid "Database Volume"
-msgstr "Volume Database"
+msgstr "Emplacement base de donnée"
 
 msgid "Database has to be empty if database volume is changed."
-msgstr "Il database deve essere vuoto se il volume del database viene cambiato."
+msgstr ""
 
 msgid "Default privilege level"
-msgstr "Livello privilegio Database"
+msgstr "Niveau de privilège par défaut"
 
 msgid "Default privileges"
-msgstr "Privilegi predefiniti"
+msgstr "Privilèges par défaut"
 
 msgid "Description"
-msgstr "Descrizione"
+msgstr "Description"
 
 msgid "Edit privileges"
-msgstr "Modifica privilegi"
+msgstr "Modifier autorisations"
 
 msgid "Edit repository"
-msgstr "Modifica repository"
+msgstr "Modifier dépot"
 
 msgid "Enable"
-msgstr "Abilita"
+msgstr "Activer"
 
 msgid ""
 "Enable automatic creation of symbolic links in users homefolder to permitted"
 " repositories."
-msgstr "Abilita la creazione automatica di link simbolici nella cartella home degli utenti per i repository consentiti."
+msgstr ""
 
 msgid ""
 "Enable read-only repository content and history browsing through GitWeb"
-msgstr "Abilita il contenuto del repository e la navigazione history attraverso GitWeb in sola lettura"
+msgstr ""
 
 msgid "General settings"
-msgstr "Impostazioni generali"
+msgstr "Paramètres généraux"
 
 msgid "Git"
 msgstr "Git"
 
 msgid "Git Web Service"
-msgstr "Servizio Web Git"
+msgstr "Service web Git"
 
 msgid "GitWeb"
 msgstr "GitWeb"
 
 msgid "Group"
-msgstr "Gruppo"
+msgstr "Groupe"
 
 msgid "Info"
-msgstr "Info"
+msgstr "Information"
 
 msgid "Launch GitWeb"
-msgstr "Avvia GitWeb"
+msgstr "Lancer GitWeb"
 
 msgid "Name"
-msgstr "Nome"
+msgstr "Nom"
 
 msgid "No access"
-msgstr "Nessun accesso"
+msgstr "Pas d'accès"
 
 msgid "Privileges"
-msgstr "Privilegi"
+msgstr "Privilèges"
 
 msgid "Read / Write"
-msgstr "Lettura / Scrittura"
+msgstr "Lecture / écriture"
 
 msgid "Read-only"
-msgstr "Sola lettura"
+msgstr "Lecture seule"
 
 msgid "Read/Write"
-msgstr "Lettura/Scrittura"
+msgstr "Lecture/écriture"
 
 msgid "Realm Name"
-msgstr "Nome Ambito"
+msgstr "Nom local"
 
 msgid "Repositories"
-msgstr "Repository"
+msgstr "Dépots"
 
 msgid "Repository name."
-msgstr "Nome Repository."
+msgstr "Nom du dépot."
 
 msgid "Repository root"
-msgstr "Radice repository"
+msgstr "Racine du dépot"
 
 msgid "Select a volume ..."
-msgstr "Seleziona un volume ..."
+msgstr "Sélectionner un volume ..."
 
 msgid "Settings"
-msgstr "Impostazioni"
+msgstr "Paramètres"
 
 msgid "Show Tab"
-msgstr "Mostra Pannello"
+msgstr "Afficher onglet"
 
 msgid "Show tab containing GitWeb frame"
-msgstr "Mostra pannello contenente GitWeb"
+msgstr "Afficher l'onglet GitWeb"
 
 msgid "Symbolic links"
-msgstr "Link simbolici"
+msgstr ""
 
 msgid "System"
-msgstr "Sistema"
+msgstr "Système"
 
 msgid "The group '%s' does not exist"
-msgstr "Il gruppo '%s' non esiste"
+msgstr "Le groupe '%s' n'existe pas"
 
 msgid "The user '%s' does not exist"
-msgstr "L'utente '%s' non esiste"
+msgstr "L'utilisateur '%s' n'existe pas"
 
 msgid "The user '%s' is not allowed"
-msgstr "L'utente '%s' non è autorizzato"
+msgstr "L'utilisateur '%s' ne possède pas les droits requis"
 
 msgid "Type"
-msgstr "Tipo"
+msgstr "Type"
 
 msgid "URL"
 msgstr "URL"
 
 msgid "User"
-msgstr "Utente"
+msgstr "Utilisateur"
 
 msgid "Users do not have to log in to view GitWeb"
-msgstr "Gli utenti non devono leggarsi per vedere GitWeb"
+msgstr "Aucun login nécessaire pour accéder à GitWeb"

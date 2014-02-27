@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Cyryl Sochacki <cyrylsochacki@gmail.com>, 2014
+# qba111 <j.ratajczak@eqba.pl>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-git\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-25 10:11-0600\n"
-"PO-Revision-Date: 2014-01-25 16:11+0000\n"
-"Last-Translator: ryecoaaron <aaron27@ryecoinc.com>\n"
+"PO-Revision-Date: 2014-02-04 20:39+0000\n"
+"Last-Translator: qba111 <j.ratajczak@eqba.pl>\n"
 "Language-Team: Polish (Poland) (http://www.transifex.com/projects/p/openmediavault-git/language/pl_PL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,10 +29,10 @@ msgid "Authentication realm."
 msgstr "Uwierzytelnianie zasobu."
 
 msgid "Database Volume"
-msgstr "Dysk"
+msgstr "Dysk bazy danych"
 
 msgid "Database has to be empty if database volume is changed."
-msgstr ""
+msgstr "Baza danych musi być pusta, jeśli zmienia się dysk bazy."
 
 msgid "Default privilege level"
 msgstr "Domyślny poziom przywilejów"
@@ -54,7 +55,7 @@ msgstr "Włącz"
 msgid ""
 "Enable automatic creation of symbolic links in users homefolder to permitted"
 " repositories."
-msgstr ""
+msgstr "Włącz automatyczne tworzenie dowiązań symbolicznych w katalogu domowym użytkowników do repozytoriów."
 
 msgid ""
 "Enable read-only repository content and history browsing through GitWeb"
@@ -124,7 +125,7 @@ msgid "Show tab containing GitWeb frame"
 msgstr "Pokaż panel GitWeb w zakładce"
 
 msgid "Symbolic links"
-msgstr ""
+msgstr "Dowiązania symboliczne"
 
 msgid "System"
 msgstr "System"

@@ -1,0 +1,150 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: openmediavault-git\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-25 10:11-0600\n"
+"PO-Revision-Date: 2014-01-31 12:40+0000\n"
+"Last-Translator: kansuke <kansuke4649@gmail.com>\n"
+"Language-Team: Japanese (Japan) (http://www.transifex.com/projects/p/openmediavault-git/language/ja_JP/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja_JP\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Add repository"
+msgstr "リポジトリの追加"
+
+msgid "Allow anonymous access"
+msgstr "anonymousアクセスの許可"
+
+msgid "Authentication realm."
+msgstr "認証レルム。"
+
+msgid "Database Volume"
+msgstr "データベースボリューム"
+
+msgid "Database has to be empty if database volume is changed."
+msgstr "データベースボリュームが変更された場合、データベースは空になります。"
+
+msgid "Default privilege level"
+msgstr "デフォルトの特権レベル"
+
+msgid "Default privileges"
+msgstr "デフォルト特権"
+
+msgid "Description"
+msgstr "詳細"
+
+msgid "Edit privileges"
+msgstr "特権の編集"
+
+msgid "Edit repository"
+msgstr "リポジトリの編集"
+
+msgid "Enable"
+msgstr "有効"
+
+msgid ""
+"Enable automatic creation of symbolic links in users homefolder to permitted"
+" repositories."
+msgstr "ユーザーのホームフォルダ内へ許可されたリポジトリへのシンボリックリンクを自動的に作成する機能を有効にします。"
+
+msgid ""
+"Enable read-only repository content and history browsing through GitWeb"
+msgstr "読み込み専用リポジトリのコンテンツと履歴をGitWebを介してブラウズする機能を有効化"
+
+msgid "General settings"
+msgstr "一般設定"
+
+msgid "Git"
+msgstr "Git"
+
+msgid "Git Web Service"
+msgstr "Git Webサービス"
+
+msgid "GitWeb"
+msgstr "GitWeb"
+
+msgid "Group"
+msgstr "グループ"
+
+msgid "Info"
+msgstr "情報"
+
+msgid "Launch GitWeb"
+msgstr "GitWebの起動"
+
+msgid "Name"
+msgstr "名前"
+
+msgid "No access"
+msgstr "アクセス拒否"
+
+msgid "Privileges"
+msgstr "特権"
+
+msgid "Read / Write"
+msgstr "読み込み / 書き込み"
+
+msgid "Read-only"
+msgstr "読み込み専用"
+
+msgid "Read/Write"
+msgstr "読み込み/書き込み"
+
+msgid "Realm Name"
+msgstr "レルム名"
+
+msgid "Repositories"
+msgstr "リポジトリ"
+
+msgid "Repository name."
+msgstr "リポジトリ名。"
+
+msgid "Repository root"
+msgstr "リポジトリのルート"
+
+msgid "Select a volume ..."
+msgstr "ボリュームを選択 ..."
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Show Tab"
+msgstr "タブの表示"
+
+msgid "Show tab containing GitWeb frame"
+msgstr "GitWebフレームを含むタブを表示"
+
+msgid "Symbolic links"
+msgstr "シンボリックリンク"
+
+msgid "System"
+msgstr "システム"
+
+msgid "The group '%s' does not exist"
+msgstr "グループ  '%s' は存在しません"
+
+msgid "The user '%s' does not exist"
+msgstr "ユーザー '%s' は存在しません"
+
+msgid "The user '%s' is not allowed"
+msgstr "ユーザー '%s' は許可されていません"
+
+msgid "Type"
+msgstr "タイプ"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "User"
+msgstr "ユーザー"
+
+msgid "Users do not have to log in to view GitWeb"
+msgstr "ユーザーはGitWebを表示するためにログインは必要ありません"

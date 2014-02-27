@@ -3,149 +3,148 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Paolo Velati <paolo.velati@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-git\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-25 10:11-0600\n"
-"PO-Revision-Date: 2014-02-11 23:25+0000\n"
-"Last-Translator: Paolo Velati <paolo.velati@gmail.com>\n"
-"Language-Team: Italian (http://www.transifex.com/projects/p/openmediavault-git/language/it/)\n"
+"PO-Revision-Date: 2014-02-07 13:07+0000\n"
+"Last-Translator: ryecoaaron <aaron27@ryecoinc.com>\n"
+"Language-Team: Danish (http://www.transifex.com/projects/p/openmediavault-git/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
+"Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Add repository"
-msgstr "Aggiungi repository"
+msgstr ""
 
 msgid "Allow anonymous access"
-msgstr "Permetti accesso anonimo"
+msgstr ""
 
 msgid "Authentication realm."
-msgstr "Ambito di autenticazione."
+msgstr ""
 
 msgid "Database Volume"
-msgstr "Volume Database"
+msgstr ""
 
 msgid "Database has to be empty if database volume is changed."
-msgstr "Il database deve essere vuoto se il volume del database viene cambiato."
+msgstr ""
 
 msgid "Default privilege level"
-msgstr "Livello privilegio Database"
+msgstr ""
 
 msgid "Default privileges"
-msgstr "Privilegi predefiniti"
+msgstr ""
 
 msgid "Description"
-msgstr "Descrizione"
+msgstr ""
 
 msgid "Edit privileges"
-msgstr "Modifica privilegi"
+msgstr ""
 
 msgid "Edit repository"
-msgstr "Modifica repository"
+msgstr ""
 
 msgid "Enable"
-msgstr "Abilita"
+msgstr ""
 
 msgid ""
 "Enable automatic creation of symbolic links in users homefolder to permitted"
 " repositories."
-msgstr "Abilita la creazione automatica di link simbolici nella cartella home degli utenti per i repository consentiti."
+msgstr ""
 
 msgid ""
 "Enable read-only repository content and history browsing through GitWeb"
-msgstr "Abilita il contenuto del repository e la navigazione history attraverso GitWeb in sola lettura"
+msgstr ""
 
 msgid "General settings"
-msgstr "Impostazioni generali"
+msgstr ""
 
 msgid "Git"
-msgstr "Git"
+msgstr ""
 
 msgid "Git Web Service"
-msgstr "Servizio Web Git"
+msgstr ""
 
 msgid "GitWeb"
-msgstr "GitWeb"
+msgstr ""
 
 msgid "Group"
-msgstr "Gruppo"
+msgstr ""
 
 msgid "Info"
-msgstr "Info"
+msgstr ""
 
 msgid "Launch GitWeb"
-msgstr "Avvia GitWeb"
+msgstr ""
 
 msgid "Name"
-msgstr "Nome"
+msgstr ""
 
 msgid "No access"
-msgstr "Nessun accesso"
+msgstr ""
 
 msgid "Privileges"
-msgstr "Privilegi"
+msgstr ""
 
 msgid "Read / Write"
-msgstr "Lettura / Scrittura"
+msgstr ""
 
 msgid "Read-only"
-msgstr "Sola lettura"
+msgstr ""
 
 msgid "Read/Write"
-msgstr "Lettura/Scrittura"
+msgstr ""
 
 msgid "Realm Name"
-msgstr "Nome Ambito"
+msgstr ""
 
 msgid "Repositories"
-msgstr "Repository"
+msgstr ""
 
 msgid "Repository name."
-msgstr "Nome Repository."
+msgstr ""
 
 msgid "Repository root"
-msgstr "Radice repository"
+msgstr ""
 
 msgid "Select a volume ..."
-msgstr "Seleziona un volume ..."
+msgstr ""
 
 msgid "Settings"
-msgstr "Impostazioni"
+msgstr ""
 
 msgid "Show Tab"
-msgstr "Mostra Pannello"
+msgstr ""
 
 msgid "Show tab containing GitWeb frame"
-msgstr "Mostra pannello contenente GitWeb"
+msgstr ""
 
 msgid "Symbolic links"
-msgstr "Link simbolici"
+msgstr ""
 
 msgid "System"
-msgstr "Sistema"
+msgstr ""
 
 msgid "The group '%s' does not exist"
-msgstr "Il gruppo '%s' non esiste"
+msgstr ""
 
 msgid "The user '%s' does not exist"
-msgstr "L'utente '%s' non esiste"
+msgstr ""
 
 msgid "The user '%s' is not allowed"
-msgstr "L'utente '%s' non è autorizzato"
+msgstr ""
 
 msgid "Type"
-msgstr "Tipo"
+msgstr ""
 
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 msgid "User"
-msgstr "Utente"
+msgstr ""
 
 msgid "Users do not have to log in to view GitWeb"
-msgstr "Gli utenti non devono leggarsi per vedere GitWeb"
+msgstr ""

@@ -1,0 +1,151 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# артур Мудрых <arturmon82@gmail.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: openmediavault-git\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-25 10:11-0600\n"
+"PO-Revision-Date: 2014-02-18 06:09+0000\n"
+"Last-Translator: артур Мудрых <arturmon82@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/openmediavault-git/language/ru/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Add repository"
+msgstr "Добавить репозиторий"
+
+msgid "Allow anonymous access"
+msgstr "Разрешить анонимный доступ"
+
+msgid "Authentication realm."
+msgstr "Область аутентификации."
+
+msgid "Database Volume"
+msgstr "Том базы данных"
+
+msgid "Database has to be empty if database volume is changed."
+msgstr "База данных должна быть пустой, если том базы данных будет изменен."
+
+msgid "Default privilege level"
+msgstr "Уровень привилегий по умолчанию"
+
+msgid "Default privileges"
+msgstr "Привилегии по умолчанию"
+
+msgid "Description"
+msgstr "Описание"
+
+msgid "Edit privileges"
+msgstr "Изменить привилегии"
+
+msgid "Edit repository"
+msgstr "Изменить репозиторий"
+
+msgid "Enable"
+msgstr "Включить"
+
+msgid ""
+"Enable automatic creation of symbolic links in users homefolder to permitted"
+" repositories."
+msgstr "Включить автоматическое создание символьных ссылок в домашней папки пользователей,  разрешенных хранилищ."
+
+msgid ""
+"Enable read-only repository content and history browsing through GitWeb"
+msgstr "Включить только для чтения содержимое репозитория  и истории посещенных страниц через GitWeb"
+
+msgid "General settings"
+msgstr "Общие параметры"
+
+msgid "Git"
+msgstr "Git"
+
+msgid "Git Web Service"
+msgstr "Git Web Сервис"
+
+msgid "GitWeb"
+msgstr "GitWeb"
+
+msgid "Group"
+msgstr "Группа"
+
+msgid "Info"
+msgstr "Информация"
+
+msgid "Launch GitWeb"
+msgstr "Запустить GitWeb"
+
+msgid "Name"
+msgstr "Имя"
+
+msgid "No access"
+msgstr "Нет доступа"
+
+msgid "Privileges"
+msgstr "Привилегии"
+
+msgid "Read / Write"
+msgstr "Чтение / Запись"
+
+msgid "Read-only"
+msgstr "Только для чтения"
+
+msgid "Read/Write"
+msgstr "Чтение/Запись"
+
+msgid "Realm Name"
+msgstr "Настоящее имя"
+
+msgid "Repositories"
+msgstr "репозитории"
+
+msgid "Repository name."
+msgstr "Имя репозитория."
+
+msgid "Repository root"
+msgstr "Корень репозитория"
+
+msgid "Select a volume ..."
+msgstr "Выберите том ..."
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Show Tab"
+msgstr "Показать Вкладку"
+
+msgid "Show tab containing GitWeb frame"
+msgstr "Показать вкладку GitWeb"
+
+msgid "Symbolic links"
+msgstr "Символические ссылки"
+
+msgid "System"
+msgstr "Система"
+
+msgid "The group '%s' does not exist"
+msgstr "Группа '%s' не существует"
+
+msgid "The user '%s' does not exist"
+msgstr "Пользователь '%s' не существует"
+
+msgid "The user '%s' is not allowed"
+msgstr "Пользователь '%s' не допускается"
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "User"
+msgstr "Пользователь"
+
+msgid "Users do not have to log in to view GitWeb"
+msgstr "Пользователям не придется регистрироваться, чтобы посмотреть GitHub"
