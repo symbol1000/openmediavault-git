@@ -1,3 +1,11 @@
+openmediavault-git (0.6.0) stable; urgency=low
+
+  * Fix github issue #12
+  * Update to work on kralizec
+  * Update locales
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Mon, 14 Apr 2014 10:34:00 -0500
+
 openmediavault-git (0.5.3) stable; urgency=low
 
   * Fix github issue #9

@@ -1,11 +1,11 @@
 #!/bin/sh
 #
-# @license		http://www.gnu.org/licenses/gpl.html GPL Version 3
-# @author		Ian Moore <imooreyahoo@gmail.com>
+# @license      http://www.gnu.org/licenses/gpl.html GPL Version 3
+# @author       Ian Moore <imooreyahoo@gmail.com>
 # @author       Marcel Beck <marcel.beck@mbeck.org>
 # @author       OpenMediaVault Plugin Developers <plugins@omv-extras.org>
-# @copyright	Copyright (c) 2011-2012 Ian Moore
-# @copyright	Copyright (c) 2012 Marcel Beck
+# @copyright    Copyright (c) 2011-2012 Ian Moore
+# @copyright    Copyright (c) 2012 Marcel Beck
 # @copyright    Copyright (c) 2013 OpenMediaVault Plugin Developers
 #
 # This file is free software: you can redistribute it and/or modify
@@ -33,11 +33,11 @@ reporootdir=$(omv_config_get "//services/git/repository-root")
 
 # Just exit if service is disabled
 if [ "$(omv_config_get "//services/git/enable")" = "0" ]; then
-        exit 0
+    exit 0
 fi
 
 # Wipe all acl entries from reporoot recursively except the default (www-data)
-setfacl -b -R $reporootdir 
+setfacl -b -R $reporootdir
 
 # Chmod repo root directory so users can "cd" into repos
 chmod o=x $reporootdir
@@ -55,22 +55,22 @@ if [ "$homedirenabled" = "1" ]; then
     index=$(omv_config_get_count "//system/usermanagement/users/user")
     while [ ${index} -gt 0 ]
     do
-            user=$(omv_config_get "//system/usermanagement/users/user[position()=${index}]/name")
-            usergitdir=$homedirroot/$user/git
-            
-            if [ ! -d "$usergitdir" ]; then
-                mkdir $usergitdir
-                chown $user $usergitdir
-            else
-                # Loop through files and delete all symlinks
-                for f in $usergitdir/*
-                do
-                    if [ -L "$f" ]; then
-                        rm $f
-                    fi
-                done
-            fi
-            index=$(( ${index} - 1 ))
+        user=$(omv_config_get "//system/usermanagement/users/user[position()=${index}]/name")
+        usergitdir=$homedirroot/$user/git
+
+        if [ ! -d "$usergitdir" ]; then
+            mkdir $usergitdir
+            chown $user $usergitdir
+        else
+            # Loop through files and delete all symlinks
+            for f in $usergitdir/*
+            do
+                if [ -L "$f" ]; then
+                    rm $f
+                fi
+            done
+        fi
+        index=$(( ${index} - 1 ))
     done
 fi
 
@@ -86,11 +86,11 @@ echo '[groups]'>${OMV_GIT_AUTHZ}
 index=$(omv_config_get_count "//system/usermanagement/groups/group")
 while [ ${index} -gt 0 ]
 do
-	group=$(omv_config_get "//system/usermanagement/groups/group[position()=${index}]/name")
-	members=$(grep "^${group}:" /etc/group | awk -F: '{ print $4 }' | sed -e s'/,\s*/, /g')
+    group=$(omv_config_get "//system/usermanagement/groups/group[position()=${index}]/name")
+    members=$(grep "^${group}:" /etc/group | awk -F: '{ print $4 }' | sed -e s'/,\s*/, /g')
 
-	echo "${group} = ${members}" >>${OMV_GIT_AUTHZ}
-	index=$(( ${index} - 1 ))
+    echo "${group} = ${members}" >>${OMV_GIT_AUTHZ}
+    index=$(( ${index} - 1 ))
 done
 
 # Allow read to all by default. Required for
@@ -108,68 +108,68 @@ do
     #Get repo directory for ACL setting
     reponame=$(omv_config_get "//services/git/repos/repo[position()=${index}]/name")
     repodir=$reporootdir/$reponame
-    
-	echo '' >>${OMV_GIT_AUTHZ}
 
-	# Get the repository reference and path
-	reporef=$(omv_config_get "//services/git/repos/repo[position()=${index}]/uuid")
+    echo '' >>${OMV_GIT_AUTHZ}
 
-	# Repo name	
-	xmlstarlet sel -t -m "//services/git/repos/repo[position()=${index}]" \
-	  -v "concat('[',name,':/]')" \
-	  ${OMV_CONFIG_FILE} | xmlstarlet unesc >> ${OMV_GIT_AUTHZ}
+    # Get the repository reference and path
+    reporef=$(omv_config_get "//services/git/repos/repo[position()=${index}]/uuid")
 
-	# Repo default privileges
-	dpriv=$(omv_config_get "//services/git/repos/repo[position()=${index}]/default-access")
+    # Repo name
+    xmlstarlet sel -t -m "//services/git/repos/repo[position()=${index}]" \
+      -v "concat('[',name,':/]')" \
+      ${OMV_CONFIG_FILE} | xmlstarlet unesc >> ${OMV_GIT_AUTHZ}
 
-	priv=''
-	case ${dpriv} in
-	"read-only")
-		priv='r';;
-	"write")
-		priv='rw';;
-	esac
+    # Repo default privileges
+    dpriv=$(omv_config_get "//services/git/repos/repo[position()=${index}]/default-access")
 
-	echo "* = ${priv}" >>${OMV_GIT_AUTHZ}
-    
+    priv=''
+    case ${dpriv} in
+    "read-only")
+        priv='r';;
+    "write")
+        priv='rw';;
+    esac
+
+    echo "* = ${priv}" >>${OMV_GIT_AUTHZ}
+
 #########################################
 # Set default user acl privileges for repo directory
 #########################################
-    index=$(omv_config_get_count "//system/usermanagement/users/user")
-    while [ ${index} -gt 0 ]
+    userindex=$(omv_config_get_count "//system/usermanagement/users/user")
+    while [ ${userindex} -gt 0 ]
     do
-            user=$(omv_config_get "//system/usermanagement/users/user[position()=${index}]/name")
-            case ${dpriv} in
-            "read-only")
-                setfacl -R -m u:$user:rx $repodir
-                ;;
-            "write")
-                setfacl -R -m u:$user:rwx $repodir
-                ;;
-            esac
-            if [ "$homedirenabled" = "1" ] && ([ "$dpriv" = "read-only" ] || [ "$dpriv" = "write" ]); then 
-                    ln -sn $repodir $homedirroot/$user/git
-            fi
-            index=$(( ${index} - 1 ))
+        user=$(omv_config_get "//system/usermanagement/users/user[position()=${userindex}]/name")
+        case ${dpriv} in
+        "read-only")
+            setfacl -R -m u:$user:rx $repodir
+            ;;
+        "write")
+            setfacl -R -m u:$user:rwx $repodir
+            ;;
+        esac
+        if [ "$homedirenabled" = "1" ] && ([ "$dpriv" = "read-only" ] || [ "$dpriv" = "write" ]); then
+            ln -sn $repodir $homedirroot/$user/git
+        fi
+        userindex=$(( ${userindex} - 1 ))
     done
-    
+
 #########################################
 # Set default group acl privileges for repo directory
 #########################################
-    index=$(omv_config_get_count "//system/usermanagement/groups/group")
-    while [ ${index} -gt 0 ]
+    groupindex=$(omv_config_get_count "//system/usermanagement/groups/group")
+    while [ ${groupindex} -gt 0 ]
     do
-            group=$(omv_config_get "//system/usermanagement/groups/group[position()=${index}]/name")
-            case ${dpriv} in
-            "read-only")
-                setfacl -R -m g:$group:rx $repodir
-                ;;
-            "write")
-                setfacl -R -m g:$group:rwx $repodir
-                ;;
-            esac
-               
-            index=$(( ${index} - 1 ))
+        group=$(omv_config_get "//system/usermanagement/groups/group[position()=${groupindex}]/name")
+        case ${dpriv} in
+        "read-only")
+            setfacl -R -m g:$group:rx $repodir
+            ;;
+        "write")
+            setfacl -R -m g:$group:rwx $repodir
+            ;;
+        esac
+
+        groupindex=$(( ${groupindex} - 1 ))
     done
 
 #########################################
@@ -231,7 +231,7 @@ do
                 esac
                 # Loop through members of the group and make symlinks to their folders
                 usersofgroup=$(grep ^$name /etc/group | cut -f4 -d':' | sed s/,/\ /g)
-                for user in $usersofgroup; 
+                for user in $usersofgroup;
                 do  # If userhomedirectories are enabled and repo symlink has not been made then make it
                     if [ "$homedirenabled" = "1" ] && [ ! -L $homedirroot/$user/git/$reponame ] && ([ ${perms} = 5 ] || [ ${perms} = 7 ]); then
                         ln -sn $repodir $homedirroot/$user/git
@@ -241,7 +241,7 @@ do
             fi
         done
     fi
-	index=$(( ${index} - 1 ))
+    index=$(( ${index} - 1 ))
 done
 
 exit 0
