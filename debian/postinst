@@ -114,7 +114,7 @@ case "$1" in
 
         # Enable required apache modules
         echo "Enable apache modules"
-        a2enmod authnz_external dav_svn dav_fs
+        a2enmod authnz_external dav_svn dav_fs authz_svn
 
         echo "Clean up old installation"
         # Clean up old installation?
