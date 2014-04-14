@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Stefan Thrane Overby <stoverby@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: openmediavault-git\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-25 10:11-0600\n"
-"PO-Revision-Date: 2014-02-07 13:07+0000\n"
-"Last-Translator: ryecoaaron <aaron27@ryecoinc.com>\n"
+"PO-Revision-Date: 2014-04-02 07:11+0000\n"
+"Last-Translator: Stefan Thrane Overby <stoverby@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/openmediavault-git/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,133 +19,133 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Add repository"
-msgstr ""
+msgstr "Tilføj arkiv"
 
 msgid "Allow anonymous access"
-msgstr ""
+msgstr "Tillad anonym adgang"
 
 msgid "Authentication realm."
-msgstr ""
+msgstr "Godkendelses rige."
 
 msgid "Database Volume"
-msgstr ""
+msgstr "Database Drev"
 
 msgid "Database has to be empty if database volume is changed."
-msgstr ""
+msgstr "Database skal være tom, hvis database drevet bliver ændret."
 
 msgid "Default privilege level"
-msgstr ""
+msgstr "Standard rettigheds niveau"
 
 msgid "Default privileges"
-msgstr ""
+msgstr "Standard rettigheder"
 
 msgid "Description"
-msgstr ""
+msgstr "Beskrivelse"
 
 msgid "Edit privileges"
-msgstr ""
+msgstr "Rediger rettigheder"
 
 msgid "Edit repository"
-msgstr ""
+msgstr "Rediger arkiv"
 
 msgid "Enable"
-msgstr ""
+msgstr "Aktiver"
 
 msgid ""
 "Enable automatic creation of symbolic links in users homefolder to permitted"
 " repositories."
-msgstr ""
+msgstr "Aktiver automatisk oprettelse af symbolske links i brugerens hjemmemappe til tilladte arkiver."
 
 msgid ""
 "Enable read-only repository content and history browsing through GitWeb"
-msgstr ""
+msgstr "Aktiver skrivebeskyttet arkiv indhold og historie oversigt gennem GitWeb."
 
 msgid "General settings"
-msgstr ""
+msgstr "Generelle indstillinger"
 
 msgid "Git"
-msgstr ""
+msgstr "Git"
 
 msgid "Git Web Service"
-msgstr ""
+msgstr "Git Web Tjeneste"
 
 msgid "GitWeb"
-msgstr ""
+msgstr "GitWeb"
 
 msgid "Group"
-msgstr ""
+msgstr "Gruppe"
 
 msgid "Info"
-msgstr ""
+msgstr "Oplysning"
 
 msgid "Launch GitWeb"
-msgstr ""
+msgstr "Start GitWeb"
 
 msgid "Name"
-msgstr ""
+msgstr "Navn"
 
 msgid "No access"
-msgstr ""
+msgstr "Ingen adgang"
 
 msgid "Privileges"
-msgstr ""
+msgstr "Rettigheder"
 
 msgid "Read / Write"
-msgstr ""
+msgstr "Læse / Skrive"
 
 msgid "Read-only"
-msgstr ""
+msgstr "Skrivebeskyttet"
 
 msgid "Read/Write"
-msgstr ""
+msgstr "Læse/Skrive"
 
 msgid "Realm Name"
-msgstr ""
+msgstr "Rige Navn"
 
 msgid "Repositories"
-msgstr ""
+msgstr "Arkiver"
 
 msgid "Repository name."
-msgstr ""
+msgstr "Arkiv navn."
 
 msgid "Repository root"
-msgstr ""
+msgstr "Arkiv rod"
 
 msgid "Select a volume ..."
-msgstr ""
+msgstr "Vælg et drev ..."
 
 msgid "Settings"
-msgstr ""
+msgstr "Indstillinger"
 
 msgid "Show Tab"
-msgstr ""
+msgstr "Vis Fane"
 
 msgid "Show tab containing GitWeb frame"
-msgstr ""
+msgstr "Vis fane indeholdende GitWeb ramme"
 
 msgid "Symbolic links"
-msgstr ""
+msgstr "Symbolske links"
 
 msgid "System"
-msgstr ""
+msgstr "System"
 
 msgid "The group '%s' does not exist"
-msgstr ""
+msgstr "Gruppen '%s' findes ikke"
 
 msgid "The user '%s' does not exist"
-msgstr ""
+msgstr "Brugeren '%s' findes ikke"
 
 msgid "The user '%s' is not allowed"
-msgstr ""
+msgstr "Brugeren '%s' har ikke tilladselse"
 
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 msgid "User"
-msgstr ""
+msgstr "Bruger"
 
 msgid "Users do not have to log in to view GitWeb"
-msgstr ""
+msgstr "Bruger skal ikke logge ind for at gennemse GitWeb"
