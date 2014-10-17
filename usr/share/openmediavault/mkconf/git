@@ -41,7 +41,7 @@ fi
 OMV_GIT_REPO_ROOT="$(omv_config_get "//services/git/repository-root")"
 
 
-# How to use external authentication on nginx?
+# ??? How to use external authentication on nginx ???
 # Create apache config file
 #cat <<EOF > ${OMV_GIT_CONFIG}
 #AddExternalAuth pwauth /usr/sbin/pwauth
