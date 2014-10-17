@@ -113,26 +113,26 @@ case "$1" in
         done
 
         # Enable required apache modules
-        echo "Enable apache modules"
-        a2enmod authnz_external dav_svn dav_fs
+        # echo "Enable apache modules"
+        # a2enmod authnz_external dav_svn dav_fs
 
         # load authz_svn for wheezy only
-        RELEASE=$(lsb_release -cs)
-        if [ "${RELEASE}" = "wheezy" ]; then
-            a2enmod authz_svn
-        fi
+        # RELEASE=$(lsb_release -cs)
+        # if [ "${RELEASE}" = "wheezy" ]; then
+        #     a2enmod authz_svn
+        # fi
 
         echo "Clean up old installation"
         # Clean up old installation?
-        if [ -f /etc/apache2/conf.d/omv-git ]; then
-            /bin/rm -f /etc/apache2/conf.d/omv-git
+        if [ -f /etc/nginx/openmediavault-webgui.d/git.conf ]; then
+            /bin/rm -f /etc/nginx/openmediavault-webgui.d/git.conf
         fi
 
-        #echo "Make configuration"
-        #omv-mkconf git
+        echo "Make configuration"
+        omv-mkconf git
 
-        echo "Restart apache2"
-        monit restart apache2
+        echo "Restart nginx"
+        monit restart nginx
 
         dpkg-trigger update-fixperms
         dpkg-trigger update-locale
