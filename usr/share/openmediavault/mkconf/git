@@ -27,7 +27,7 @@ set -e
 . /usr/share/openmediavault/scripts/helper-functions
 
 
-OMV_GIT_CONFIG=${OMV_GIT_CONFIG:-"/etc/apache2/openmediavault-webgui.d/git.conf"}
+OMV_GIT_CONFIG=${OMV_GIT_CONFIG:-"/etc/nginx/openmediavault-webgui.d/git.conf"}
 
 # Enable/disable service
 if [ "$(omv_config_get "//services/git/enable")" = "0" ]; then
@@ -40,12 +40,13 @@ fi
 
 OMV_GIT_REPO_ROOT="$(omv_config_get "//services/git/repository-root")"
 
-# Create apache config file
-cat <<EOF > ${OMV_GIT_CONFIG}
-AddExternalAuth pwauth /usr/sbin/pwauth
-SetExternalAuthMethod pwauth pipe
 
-EOF
+# How to use external authentication on nginx?
+# Create apache config file
+#cat <<EOF > ${OMV_GIT_CONFIG}
+#AddExternalAuth pwauth /usr/sbin/pwauth
+#SetExternalAuthMethod pwauth pipe
+#EOF
 
 # GitWeb config
 if [ "$(omv_config_get "//services/git/gitweb-enable")" = "1" ]; then
