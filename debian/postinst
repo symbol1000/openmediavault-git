@@ -122,17 +122,21 @@ case "$1" in
         #     a2enmod authz_svn
         # fi
 
-        echo "Clean up old installation"
         # Clean up old installation?
+        # This file is added on installation by an other package
+        if [ -f /etc/apache2/conf.d/gitweb ]; then
+            echo "Clean up default installation"
+            /bin/rm -f /etc/apache2/conf.d/gitweb
+        fi
+        
         if [ -f /etc/nginx/openmediavault-webgui.d/git.conf ]; then
             /bin/rm -f /etc/nginx/openmediavault-webgui.d/git.conf
+            echo "Make configuration"
+            omv-mkconf git
         fi
 
-        echo "Make configuration"
-        omv-mkconf git
-
         echo "Restart nginx"
-        monit restart nginx
+        service nginx restart # nginx is not configured for monit
 
         dpkg-trigger update-fixperms
         dpkg-trigger update-locale
