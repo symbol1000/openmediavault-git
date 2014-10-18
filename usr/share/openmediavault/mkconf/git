@@ -48,22 +48,36 @@ OMV_GIT_REPO_ROOT="$(omv_config_get "//services/git/repository-root")"
 #SetExternalAuthMethod pwauth pipe
 #EOF
 
-# GitWeb config
-if [ "$(omv_config_get "//services/git/gitweb-enable")" = "1" ]; then
+# GitWeb config enabled?
+if [ "$(omv_config_get "//services/git/gitweb-enable")" != "1" ]; then
+    exit 0
+fi
 
-    echo "\$projectroot = '${OMV_GIT_REPO_ROOT}/';" >/etc/git/web.conf
+# Update repository location for gitweb    
+echo "\$projectroot = '${OMV_GIT_REPO_ROOT}/';" >/etc/git/web.conf
 
-    cat <<EOF >> ${OMV_GIT_CONFIG}
+# Update nginx ocnfiguration file
+cat <<EOF >> ${OMV_GIT_CONFIG}
 
-AliasMatch ^/git/(git\-favicon\.png|git\-logo\.png|gitweb\.css|gitweb\.js|index\.cgi)$ "/var/www/gitweb/\$1"
-AliasMatch ^/git/(.+)$ "${OMV_GIT_REPO_ROOT}/\$1"
-RedirectMatch ^/git/*$ "/git/index.cgi"
+location /gitweb/ {
+    alias /var/www/gitweb/;
+    index index.cgi
+}
 
-<Directory /var/www/gitweb>
-    DirectoryIndex index.cgi
-    Options FollowSymLinks +ExecCGI
-    AddHandler cgi-script .cgi
+location /gitweb/index.cgi {
+    alias /var/www/gitweb/;
+    include fastcgi_params;
+    gzip off;
+    fastcgi_param SCRIPT_NAME $uri;
+    fastcgi_param GITWEB_CONFIG /etc/gitweb.conf;
+    fastcgi_pass  unix:/var/run/fcgiwrap.socket;
+}
+
 EOF
+
+exit 0
+
+# Code below has not been converted to nginx
 
     if [ "$(omv_config_get "//services/git/gitweb-anon")" = "0" ]; then
         echo "  <limit GET PUT POST DELETE PROPPATCH MKCOL COPY MOVE LOCK UNLOCK PROPFIND OPTIONS REPORT>" >>${OMV_GIT_CONFIG}
