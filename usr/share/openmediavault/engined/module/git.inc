@@ -53,7 +53,7 @@ class OMVModuleGit extends OMVModuleServiceAbstract
         }
 
         // This is the best I could do
-        $cmd = sprintf("sudo /bin/sh -c '[ -f /etc/apache2/openmediavault-webgui.d/git.conf ] && echo ok'");
+        $cmd = sprintf("sudo /bin/sh -c '[ -f /etc/nginx/openmediavault-webgui.d/git.conf ] && echo ok'");
         OMVUtil::exec($cmd, $output, $result);
         return array(
             "name" => $this->getName(),
@@ -70,7 +70,7 @@ class OMVModuleGit extends OMVModuleServiceAbstract
 
         global $xmlConfig;
 
-        // Create apache git file
+        // Create gitweb file
         $cmd = "sudo omv-mkconf git 2>&1";
         OMVUtil::exec($cmd, $output, $result);
         if ($result !== 0) {
@@ -93,7 +93,7 @@ class OMVModuleGit extends OMVModuleServiceAbstract
         if(FALSE === boolval($object['enable']))
             return;
 
-        $initd = new OMVSysVInitScript("apache2", TRUE);
+        $initd = new OMVSysVInitScript("nginx", TRUE);
         $initd->invoke("graceful");
     }
 
