@@ -93,8 +93,6 @@ class OMVModuleGit extends OMVModuleServiceAbstract
         if(FALSE === boolval($object['enable']))
             return;
 
-        $initd = new OMVSysVInitScript("nginx", TRUE);
-        $initd->invoke("graceful");
     }
 
     /**
