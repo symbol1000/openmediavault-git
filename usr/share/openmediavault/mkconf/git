@@ -64,7 +64,7 @@ location /gitweb/index.cgi {
     fastcgi_pass unix:/var/run/fcgiwrap.socket;
     fastcgi_param SCRIPT_FILENAME   /usr/share/gitweb/gitweb.cgi;
     fastcgi_param PATH_INFO         \$uri;
-    fastcgi_param GITWEB_CONFIG     /etc/gitweb.conf;
+    fastcgi_param GITWEB_CONFIG     /etc/git/web.conf;
     include fastcgi_params;
   }
 
@@ -74,9 +74,22 @@ location /gitweb/index.cgi {
   }
 EOF
 
+# Check that configtest passed. We don't want
+# nginx to fail to start
+CTEST=`service nginx configtest 2>&1 || echo ___FAILED___`
+if [ `echo $CTEST | grep -c ___FAILED___` -gt 0 ]; then
+    echo "Config test failed. Removing ${OMV_GIT_CONFIG}..."
+    # Pass error to web page
+    echo `service nginx configtest 2>&1 || echo `
+    /bin/rm -f ${OMV_GIT_CONFIG}
+    exit 1
+fi
+
+# Config test passed. Restart to enable gitweb
 service nginx restart
 
 exit 0
+
 
 # Code below has not been converted to nginx
 
@@ -113,16 +126,3 @@ cat <<EOF >>${OMV_GIT_CONFIG}
 </Location>
 
 EOF
-
-# Check that configtest passed. We don't want
-# apache to fail to start
-CTEST=`/usr/sbin/apache2ctl configtest 2>&1 || echo ___FAILED___`
-
-if [ `echo $CTEST | grep -c ___FAILED___` -gt 0 ]; then
-    echo "Config test failed. Removing ${OMV_GIT_CONFIG}..."
-    # Pass error to web page
-    echo `/usr/sbin/apache2ctl configtest 2>&1 || echo `
-    /bin/rm -f ${OMV_GIT_CONFIG}
-    exit 1
-fi
-
