@@ -57,7 +57,7 @@ fi
 echo "\$projectroot = '${OMV_GIT_REPO_ROOT}/';" >/etc/git/web.conf
 
 # Update nginx ocnfiguration file
-cat <<EOF >> ${OMV_GIT_CONFIG}
+cat <<EOF > ${OMV_GIT_CONFIG}
 location /gitweb/index.cgi {
     alias /usr/share/gitweb/;
     gzip off;
@@ -73,6 +73,8 @@ location /gitweb/index.cgi {
     index index.cgi;
   }
 EOF
+
+service nginx restart
 
 exit 0
 
