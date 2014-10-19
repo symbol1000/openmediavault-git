@@ -135,9 +135,6 @@ case "$1" in
             omv-mkconf git
         fi
 
-        echo "Restart nginx"
-        service nginx restart # nginx is not configured for monit
-
         dpkg-trigger update-fixperms
         dpkg-trigger update-locale
     ;;

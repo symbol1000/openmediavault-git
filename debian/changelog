@@ -1,3 +1,11 @@
+openmediavault-git (1.0.0) stable; urgency=low
+
+  * Changed from apache2 to nginx 
+  * Removed apache2 restart from postinst and module .inc. Restart done in plugin script (Closes: #14 github)
+
+ -- OpenMediaVault Plugin Developers <plugins@omv-extras.org>  Sun, 19 Oct 2014 12:34:00 +0200
+
+
 openmediavault-git (0.6.0) stable; urgency=low
 
   * Fix github issue #12
